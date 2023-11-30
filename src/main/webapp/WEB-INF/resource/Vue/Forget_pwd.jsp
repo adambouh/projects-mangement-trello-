@@ -3,8 +3,10 @@
 <html>
 <head>
     <title>Login Page</title>
-    <link href="//fonts.googleapis.com/css?family=Hind:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700" rel="stylesheet">
  	<link rel="stylesheet" type="text/css" href="css/style.css">
+ 	     	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> 	
+ 	
 
 </head>
 <body>
@@ -36,14 +38,13 @@
                         </div>
                         
                         <!-- error message -->
-                        <div class="bottom">
-                            <button class="btn1" type="submit">Searchjhkjnkjnknkjnkj</button>
-                            <button class="btn2" type="submit">Annuler</button>
-                        </div>
+                       
 
-                        <div class="links">vchfc fc f
-                            <p><a href="#">Forgot Password?</a></p>
-                            <p class="right"><a href="">New User? Register</a></p>
+                        <div class="forgot">
+
+                          <button type="button" class="btn btn-primary btn-sm">Search</button>
+                          <button type="button" class="btn btn-secondary btn-sm">Annuler</button>
+                    
                             <div class="clear"></div>
                         </div>
                     </form>	
