@@ -41,7 +41,7 @@
                             <button class="btn2" type="submit">Annuler</button>
                         </div>
 
-                        <div class="links">
+                        <div class="links">vchfc fc f
                             <p><a href="#">Forgot Password?</a></p>
                             <p class="right"><a href="">New User? Register</a></p>
                             <div class="clear"></div>
