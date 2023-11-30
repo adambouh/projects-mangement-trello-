@@ -2,11 +2,11 @@ package dataLayer;
 
 import java.util.Hashtable;
 
-import models.Account;
+import models.User;
 
 public interface InterfaceDataAccountsManager {
 
-	public void AddAccount(Account p);
-	public Boolean ValidateAccount(Account p);
+	public void AddAccount(User p);
+	public Boolean ValidateAccount(User p);
 	public Hashtable<String, String> GetAccounts();
 }

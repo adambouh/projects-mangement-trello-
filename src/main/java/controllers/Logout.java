@@ -1,4 +1,4 @@
-package Authentification;
+package controllers;
 import java.io.IOException;
 
 import jakarta.servlet.annotation.WebServlet;

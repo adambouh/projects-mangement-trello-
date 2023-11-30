@@ -2,12 +2,12 @@ package businessLayer;
 
 import java.util.Hashtable;
 
-import models.Account;
+import models.User;
 
 public interface InterfaceAccountsManager {
-	public void AddAccount(Account p);
+	public void AddAccount(User p);
 	public void AddAccount(String userName, String password);
 	public Boolean ValidateAccount(String userName, String password);
-	public Boolean ValidateAccount(Account p);
+	public Boolean ValidateAccount(User p);
 	public Hashtable<String, String> GetAccounts();
 }
