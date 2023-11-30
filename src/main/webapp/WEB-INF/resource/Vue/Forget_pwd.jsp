@@ -37,7 +37,7 @@
                         
                         <!-- error message -->
                         <div class="bottom">
-                            <button class="btn1" type="submit">Search</button>
+                            <button class="btn1" type="submit">Searchjhkjnkjnknkjnkj</button>
                             <button class="btn2" type="submit">Annuler</button>
                         </div>
 
