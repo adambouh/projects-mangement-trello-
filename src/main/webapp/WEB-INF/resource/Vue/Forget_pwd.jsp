@@ -40,13 +40,16 @@
                         <!-- error message -->
                        
 
-                        <div class="forgot">
-
-                          <button type="button" class="btn btn-primary btn-sm">Search</button>
-                          <button type="button" class="btn btn-secondary btn-sm">Annuler</button>
-                    
-                            <div class="clear"></div>
+                        
+ <div class="bottom">
+                            <button class="btn" type="submit">Rechercher</button>
                         </div>
+                        <div class="bottom">
+                            <button class="btn" >Annuler</button>
+                        </div>
+                         
+                    
+                        
                     </form>	
                 </div>
             </div>
