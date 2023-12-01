@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="header.jspf"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,16 +41,13 @@
                         <!-- error message -->
                        
 
-                        
- <div class="bottom">
-                            <button class="btn" type="submit">Rechercher</button>
-                        </div>
-                        <div class="bottom">
-                            <button class="btn" >Annuler</button>
-                        </div>
-                         
+                        <div class="forgot">
+
+                          <button id ="bt 1"type="button" class="btn btn-primary btn-sm">Search</button>
+                          <button type="button" class="btn btn-secondary btn-sm">Annuler</button>
                     
-                        
+                            <div class="clear"></div>
+                        </div>
                     </form>	
                 </div>
             </div>

@@ -338,7 +338,7 @@ h3 a {
 	-ms-transition: 0.5s all;
 	transition: 0.5s all;
 }
-.forget button.btn1 {/html/body/div/div/div/div[2]/form/div[2]/button[1]
+.forget  btn btn-primary btn-sm{
     background: #007cc0;
     color: #fff;
     font-size: 15px;
@@ -355,6 +355,7 @@ h3 a {
     border: none;
 	width: 100%;
 }
+
 /*-- //copyright --*/
 /*-- //main --*/
 

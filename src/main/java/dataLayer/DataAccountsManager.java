@@ -36,6 +36,16 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 	        return false;
 	    }
 	}
+	@Override
+	public Boolean IsUser(String username) {
+	    GetAccounts();
+	  //  System.out.println(table);
+	    if (username != null && table.containsKey(username)) {
+	       return true;
+	    } else {
+	        return false;
+	    }
+	}
 
 	@Override
 	public Hashtable<String, String> GetAccounts() {

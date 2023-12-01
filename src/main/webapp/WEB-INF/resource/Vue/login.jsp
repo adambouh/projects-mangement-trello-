@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="header.jspf"%>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Login Page</title>
     <link href="//fonts.googleapis.com/css?family=Hind:300,400,500,600,700" rel="stylesheet">
  	<link rel="stylesheet" type="text/css" href="css/style.css">
-
 </head>
 <body>
-    <!-- login.jsp -->
 
     <script>
         window.addEventListener("load", function () {

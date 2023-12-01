@@ -1,7 +1,9 @@
 package Vue;
+import controllers.Authenification;
 import java.io.IOException;
 
 import dataLayer.DataAccountsManager;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,13 +14,16 @@ import controllers.Authenification;
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public Home() {
+    public Home() { 
         super();
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+           RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/resource/Vue/home.jsp");
+           dispatcher.forward(request, response);
+           
         }
    
 	}

@@ -50,12 +50,10 @@ public class Login extends HttpServlet {
 	    	User user = new User(username, password);
 	    	DataAccountsManager dataManager = new DataAccountsManager();
 	        try {
-	        	System.out.print(user);
-	        	System.out.print("\nnn");
-
-	            // Use the DataAccountsManager to validate the account
+	        	
 	            return dataManager.ValidateAccount(user);
 	        } catch (Exception e) {
+	        	
 	            e.printStackTrace();
 	            return false; // Return false in case of an exception
 	        }
