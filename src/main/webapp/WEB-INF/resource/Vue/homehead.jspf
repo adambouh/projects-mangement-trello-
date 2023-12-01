@@ -1,9 +1,9 @@
 <%
 boolean isAuthenticated = session.getAttribute("username") != null;
-if (isAuthenticated){%>
+if (!isAuthenticated){%>
   
 <script type="text/javascript">
-    window.location.replace("home");
+    window.location.replace("Login");
 </script> 
 <%}%>
 

@@ -3,6 +3,7 @@ import controllers.Authenification;
 import java.io.IOException;
 
 import dataLayer.DataAccountsManager;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,11 +20,9 @@ public class Home extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		   HttpSession session = request.getSession(false);
-           if(!Authenification.isconnected((String) session.getAttribute("username"))) {
-        	   response.sendRedirect("Login");
-           }
-           
+		
+           RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/resource/Vue/home.jsp");
+           dispatcher.forward(request, response);
            
         }
    

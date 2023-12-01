@@ -42,6 +42,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>Home</display-name>
+    <servlet-name>Home</servlet-name>
+    <servlet-class>Vue.Home</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Home</servlet-name>
+    <url-pattern>/Home</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>Forget_pwd</display-name>
     <servlet-name>Forget_pwd</servlet-name>
     <servlet-class>Vue.Forget_pwd</servlet-class>
