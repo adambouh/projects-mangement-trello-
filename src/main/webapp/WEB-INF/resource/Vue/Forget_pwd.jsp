@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="header.jspf"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +43,7 @@
 
                         <div class="forgot">
 
-                          <button type="button" class="btn btn-primary btn-sm">Search</button>
+                          <button id ="bt 1"type="button" class="btn btn-primary btn-sm">Search</button>
                           <button type="button" class="btn btn-secondary btn-sm">Annuler</button>
                     
                             <div class="clear"></div>

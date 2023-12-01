@@ -40,8 +40,8 @@ public class Authenification extends HttpServlet {
 			
 	    }
 
-	static public void isconnected() {
-		return ;
-	}
+	static public boolean isconnected(String username) {
+		DataAccountsManager dataManager = new DataAccountsManager();
+		  return dataManager.IsUser(username);	}
 	
 }

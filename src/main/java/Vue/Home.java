@@ -1,4 +1,5 @@
 package Vue;
+import controllers.Authenification;
 import java.io.IOException;
 
 import dataLayer.DataAccountsManager;
@@ -12,13 +13,18 @@ import controllers.Authenification;
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public Home() {
+    public Home() { 
         super();
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		   HttpSession session = request.getSession(false);
+           if(!Authenification.isconnected((String) session.getAttribute("username"))) {
+        	   response.sendRedirect("Login");
+           }
+           
+           
         }
    
 	}
