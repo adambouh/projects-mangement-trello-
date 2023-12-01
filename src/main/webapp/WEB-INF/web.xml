@@ -9,6 +9,7 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>login.jsp</welcome-file>
     <welcome-file>Forget_pwd.jsp</welcome-file>
+    <welcome-file>Register.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
   </welcome-file-list>
   <servlet-mapping>
@@ -48,5 +49,15 @@
   <servlet-mapping>
     <servlet-name>Forget_pwd</servlet-name>
     <url-pattern>/Forget_pwd</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Register</display-name>
+    <servlet-name>Register</servlet-name>
+    <servlet-class>Vue.Register</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Register</servlet-name>
+    <url-pattern>/Register</url-pattern>
   </servlet-mapping>
 </web-app>

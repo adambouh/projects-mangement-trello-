@@ -45,7 +45,7 @@
 
                         <div class="links">
                             <p><a href="Forget_pwd">Forgot Password?</a></p>
-                            <p class="right"><a href="">New User? Register</a></p>
+                            <p class="right"><a href="Register">New User? Register</a></p>
                             <div class="clear"></div>
                         </div>
                     </form>	
