@@ -7,7 +7,7 @@ public class ChefdeProjet extends User {
 
 	public ChefdeProjet(String username, String password, ArrayList<Projet> projets) {
 		super(username, password);
-		this.projets = new ArrayList<Projet>();
+		this.projets = projets;
 	}
 
 	public ChefdeProjet(String username, String password) {
@@ -15,9 +15,15 @@ public class ChefdeProjet extends User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void modifierProjet(Projet p) {
-		
+	public ArrayList<Projet> getProjets() {
+		return projets;
 	}
+
+	public void setProjets(ArrayList<Projet> projets) {
+		this.projets = projets;
+	}
+
+	
 	
 	
 

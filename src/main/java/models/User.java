@@ -6,18 +6,43 @@ public class User {
 	private String prenom;
 	private String password;
 	private String role;
+	private String email;
+	private String ProfilePic;
 
 	public User(String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;
 	}
-	public User(String username, String password,String role) {
+	
+	public User(String username, String nom, String prenom, String password, String role, String email,
+			String profilePic) {
 		super();
 		this.username = username;
+		this.nom = nom;
+		this.prenom = prenom;
 		this.password = password;
-		this.role = role;	
+		this.role = role;
+		this.email = email;
+		this.ProfilePic= profilePic;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getProfilePic() {
+		return ProfilePic;
+	}
+
+	public void setProfilePic(String profilePic) {
+		ProfilePic = profilePic;
+	}
+
 	public String getRole() {
 		return role;
 	}
