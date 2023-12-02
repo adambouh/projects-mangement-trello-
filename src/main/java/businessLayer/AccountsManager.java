@@ -33,15 +33,22 @@ public class AccountsManager implements InterfaceAccountsManager  {
 		// TODO Auto-generated method stub
 		return db.ValidateAccount(p);
 	}
+	
 
 	@Override
 	public Hashtable<String, String> GetAccounts() {
 		// TODO Auto-generated method stub
 		return db.GetAccounts();
 	}
+	
 	public boolean isDirecteur(String username){
 		return db.isDirecteur(username);
 	}
+	public boolean isChefDeProjet(String username){
+		return db.isChefDeProjet(username);
+	}
+	
+	
 	
 
 }

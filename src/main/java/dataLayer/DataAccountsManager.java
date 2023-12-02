@@ -67,51 +67,34 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 	    }
 	    return table;
 	}
+	
 	@Override
 	public boolean isDirecteur(String username) {
-		String id;
-		   try {
-		        ResultSet resultSet = DbConnection.getId("username");
-		        while (resultSet.next()) {
-		           id = resultSet.getString("id"); } }
-		        catch (SQLException e) {
-		   	        e.printStackTrace();
-		   	    }
-		   try {
-		        ResultSet resultSet = DbConnection.getDirecteur("id");
-		       if (resultSet.next() )
-		           return true;
-		       else
-		    	   return false;
-		   }
-		        catch (SQLException e) {
-		   	        e.printStackTrace();
-		   	    }
-		   
-		return false;
+	    String userRole;
+	    try {
+	        ResultSet resultSet = DbConnection.getUserRole(username);
+	        userRole = resultSet.next() ? resultSet.getString("Role") : null;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        userRole = null;
+	    }
+	    return "Directeur".equals(userRole);
+	    }
+	
+	    
+
+@Override
+	public boolean isChefDeProjet(String username) {
+	    String userRole;
+	    try {
+	        ResultSet resultSet = DbConnection.getUserRole(username);
+	        userRole = resultSet.next() ? resultSet.getString("Role") : null;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        userRole = null;
+	    }
+	    return "Chef de Projet".equals(userRole);
 	}
-	@Override
-		public boolean isChef(String username) {
-			String id;
-			   try {
-			        ResultSet resultSet = DbConnection.getId("username");
-			        while (resultSet.next()) {
-			           id = resultSet.getString("id"); } }
-			        catch (SQLException e) {
-			   	        e.printStackTrace();
-			   	    }
-			   try {
-			        ResultSet resultSet = DbConnection.getChef("id");
-			       if (resultSet.next())
-			           return true;
-			       else
-			    	   return false;
-			   }
-			        catch (SQLException e) {
-			   	        e.printStackTrace();
-			   	    }
-			   
-			return false;
-		}
+
 
 }
