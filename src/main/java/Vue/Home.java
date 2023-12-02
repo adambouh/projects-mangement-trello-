@@ -20,7 +20,8 @@ public class Home extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+
            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/resource/Vue/home.jsp");
            dispatcher.forward(request, response);
            

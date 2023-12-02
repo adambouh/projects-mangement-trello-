@@ -39,5 +39,9 @@ public class AccountsManager implements InterfaceAccountsManager  {
 		// TODO Auto-generated method stub
 		return db.GetAccounts();
 	}
+	public boolean isDirecteur(String username){
+		return db.isDirecteur(username);
+	}
+	
 
 }

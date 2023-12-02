@@ -33,7 +33,7 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println(request.getParameter("username"));
+		if(request.getParameter("username")!=null) {
         String username = (String) request.getParameter("username");
         String password = (String) request.getParameter("password");
         boolean valide =Authenification.validateCredentials(username, password);
@@ -43,7 +43,11 @@ public class Login extends HttpServlet {
              response.sendRedirect("Home");
         }else {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/resource/Vue/login.jsp");
-        dispatcher.forward(request, response);}
+        dispatcher.forward(request, response);}}
+		else { RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/resource/Vue/login.jsp");
+        dispatcher.forward(request, response);
+			
+		}
 	}
 	public static boolean validateCredentials(String username, String password) {
 	      // another class

@@ -1,0 +1,44 @@
+   <div class="app-sidebar">
+      <a href="" class="app-sidebar-link active">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <polyline points="9 22 9 12 15 12 15 22" /></svg>
+      </a>
+      <a href="" class="app-sidebar-link">
+        <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-pie-chart" viewBox="0 0 24 24">
+          <defs />
+          <path d="M21.21 15.89A10 10 0 118 2.83M22 12A10 10 0 0012 2v10z" />
+        </svg>
+      </a>
+      <a href="" class="app-sidebar-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+          <line x1="16" y1="2" x2="16" y2="6" />
+          <line x1="8" y1="2" x2="8" y2="6" />
+          <line x1="3" y1="10" x2="21" y2="10" /></svg>
+      </a>
+      <a href="" class="app-sidebar-link">
+        <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-settings" viewBox="0 0 24 24">
+          <defs />
+          <circle cx="12" cy="12" r="3" />
+          <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
+        </svg>
+      </a>
+      <a href="logout" class="app-sidebar-link">
+  <svg fill="#000000" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 952.5 952.5" xml:space="preserve" class="feather custom-icon">
+    <g>
+      <path d="M162.45,822.5c40.7,40.699,88.2,72.699,141,95.1c54.8,23.201,112.899,34.9,172.8,34.9s118-11.699,172.8-34.9
+        c52.9-22.4,100.3-54.299,141-95.1c40.7-40.699,72.7-88.199,95.101-141c23.199-54.801,34.899-112.9,34.899-172.801
+        c0-59.899-11.7-118-34.899-172.799c-22.4-52.9-54.301-100.3-95.101-141c-40.7-40.7-88.2-72.7-141-95.1
+        c-7.5-3.2-15.1-6.1-22.8-8.9v153.5c23.4,13.3,45.2,29.9,64.8,49.5c57.4,57.4,89,133.7,89,214.799c0,81.102-31.6,157.4-89,214.801
+        c-57.399,57.4-133.7,89-214.8,89s-157.4-31.6-214.8-89c-57.4-57.4-89-133.699-89-214.801c0-81.099,31.6-157.399,89-214.799
+        c19.6-19.6,41.399-36.2,64.8-49.5V90.9c-7.6,2.8-15.2,5.7-22.8,8.9c-52.9,22.4-100.3,54.3-141,95.1c-40.7,40.7-72.7,88.2-95.1,141
+        c-23.2,54.8-34.9,112.9-34.9,172.799c0,59.9,11.7,118,34.9,172.801C89.75,734.301,121.75,781.801,162.45,822.5z"/>
+      <path d="M476.25,511.801c38.7,0,70-31.301,70-70V213V70.4V70c0-38.7-31.3-70-70-70s-70,31.3-70,70v0.4V213v228.9
+        C406.25,480.5,437.55,511.801,476.25,511.801z"/>
+    </g>
+  </svg>
+</a>
+      
+      
+    </div>

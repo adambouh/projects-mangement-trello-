@@ -97,8 +97,7 @@ public class Projet {
 
    
     public Projet(String projectName, Date dateBegin, Date dateLivraison, Date datePresentationEquipe,
-            String description, String client, ArrayList<Developpeur> equipe, ArrayList<Methodologie> methodologies,
-            ArrayList<Technologie> technologies, ArrayList<Services> services) {
+            String description, String client) {
         this.projectName = projectName;
         this.dateBegin = dateBegin;
         this.dateLivraison = dateLivraison;

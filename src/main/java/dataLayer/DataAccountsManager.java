@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Hashtable;
 
+import com.mysql.cj.protocol.Resultset;
+
 import models.Account;
 import models.User;
 import db.DbConnection;
@@ -36,7 +38,7 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 	        return false;
 	    }
 	}
-	@Override
+	 @Override
 	public Boolean IsUser(String username) {
 	    GetAccounts();
 	  //  System.out.println(table);
@@ -55,9 +57,8 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 	        while (resultSet.next()) {
 	            String username = resultSet.getString("username");
 	            String password = resultSet.getString("password");
-	            String role = resultSet.getString("role");
 
-	            User user = new User(username, password, role);
+	            User user = new User(username, password);
 	            AddAccount(user);
 	        }
 	        return table;
@@ -66,5 +67,51 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 	    }
 	    return table;
 	}
+	@Override
+	public boolean isDirecteur(String username) {
+		String id;
+		   try {
+		        ResultSet resultSet = DbConnection.getId("username");
+		        while (resultSet.next()) {
+		           id = resultSet.getString("id"); } }
+		        catch (SQLException e) {
+		   	        e.printStackTrace();
+		   	    }
+		   try {
+		        ResultSet resultSet = DbConnection.getDirecteur("id");
+		       if (resultSet.next() )
+		           return true;
+		       else
+		    	   return false;
+		   }
+		        catch (SQLException e) {
+		   	        e.printStackTrace();
+		   	    }
+		   
+		return false;
+	}
+	@Override
+		public boolean isChef(String username) {
+			String id;
+			   try {
+			        ResultSet resultSet = DbConnection.getId("username");
+			        while (resultSet.next()) {
+			           id = resultSet.getString("id"); } }
+			        catch (SQLException e) {
+			   	        e.printStackTrace();
+			   	    }
+			   try {
+			        ResultSet resultSet = DbConnection.getChef("id");
+			       if (resultSet.next())
+			           return true;
+			       else
+			    	   return false;
+			   }
+			        catch (SQLException e) {
+			   	        e.printStackTrace();
+			   	    }
+			   
+			return false;
+		}
 
 }

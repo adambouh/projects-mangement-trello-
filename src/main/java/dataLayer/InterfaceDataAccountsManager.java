@@ -9,4 +9,6 @@ public interface InterfaceDataAccountsManager {
 	public Boolean ValidateAccount(User p);
 	public Hashtable<String, String> GetAccounts();
 	Boolean IsUser(String username);
+	boolean isDirecteur(String username);
+	boolean isChef(String username);
 }
