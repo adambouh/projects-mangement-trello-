@@ -213,7 +213,7 @@ button, a {
   border-radius: 50%;
   margin-right: 4px;
 }
-.profile-btn span {
+.profile-btn a span {
   color: var(--main-color);
   font-size: 16px;
   line-height: 24px;
