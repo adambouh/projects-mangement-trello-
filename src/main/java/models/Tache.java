@@ -1,14 +1,17 @@
 package models;
 public class Tache{
+	private User dev;
     private String Name;
-    private int Progress;
+    private boolean done;
     
-	public Tache( String name,int progress) {
+	public Tache( User dev,String name,boolean done) {
 		super();
+		this.dev= dev;
 		this.Name= name;
-		this.Progress=progress;
+		this.done=done;
 	}
-	
+
+
 
     
 }
