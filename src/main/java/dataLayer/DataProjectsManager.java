@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.mysql.cj.protocol.Resultset;
+
 import businessLayer.AccountsManager;
 import db.DbConnection;
 import models.Projet;
@@ -25,7 +27,7 @@ public class DataProjectsManager implements InterfaceDataProjectsManager {
 	@Override
 	public ArrayList<Projet> GetProjectsDev() {
 		
-		return null;
+				return null;
 	}
 	public ArrayList<Projet> GetProjectsChef() {
 		// TODO Auto-generated method stub
