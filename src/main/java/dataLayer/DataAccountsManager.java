@@ -24,7 +24,7 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 	}
 
 	@Override
-	public Boolean ValidateAccount(User p) {
+	public boolean ValidateAccount(User p) {
 	    GetAccounts();
 	  //  System.out.println(table);
 	    if (p.getUsername() != null && table.containsKey(p.getUsername())) {
@@ -39,7 +39,7 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 	    }
 	}
 	 @Override
-	public Boolean IsUser(String username) {
+	public boolean IsUser(String username) {
 	    GetAccounts();
 	  //  System.out.println(table);
 	    if (username != null && table.containsKey(username)) {
@@ -48,7 +48,32 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 	        return false;
 	    }
 	}
+	 public boolean isDirecteur(String username) {
+		    String userRole;
+		    try {
+		        ResultSet resultSet = DbConnection.getUserRole(username);
+		        userRole = resultSet.next() ? resultSet.getString("Role") : null;
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		        userRole = null;
+		    }
+		    return "Directeur".equals(userRole);
+		}
 
+		public boolean isChefProjet(String username) {
+		    String userRole;
+		    try {
+		        ResultSet resultSet = DbConnection.getUserRole(username);
+		        userRole = resultSet.next() ? resultSet.getString("Role") : null;
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		        userRole = null;
+		    }
+		    return "Chef de Projet".equals(userRole);
+		}
+	 
+
+	 
 	@Override
 	public Hashtable<String, String> GetAccounts() {
 	    table.clear(); // Clear the existing data
@@ -68,33 +93,4 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 	    return table;
 	}
 	
-	@Override
-	public boolean isDirecteur(String username) {
-	    String userRole;
-	    try {
-	        ResultSet resultSet = DbConnection.getUserRole(username);
-	        userRole = resultSet.next() ? resultSet.getString("Role") : null;
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        userRole = null;
-	    }
-	    return "Directeur".equals(userRole);
-	    }
-	
-	    
 
-@Override
-	public boolean isChefDeProjet(String username) {
-	    String userRole;
-	    try {
-	        ResultSet resultSet = DbConnection.getUserRole(username);
-	        userRole = resultSet.next() ? resultSet.getString("Role") : null;
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        userRole = null;
-	    }
-	    return "Chef de Projet".equals(userRole);
-	}
-
-
-}

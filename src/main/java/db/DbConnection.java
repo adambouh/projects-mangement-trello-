@@ -197,6 +197,17 @@ public class DbConnection {
 
         return taches;
     }
+    public static ResultSet getUserRole(String username) throws SQLException {
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement("SELECT Role FROM Users WHERE Username = ?")) {
+
+            preparedStatement.setString(1, username);
+
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
 
     public ArrayList<Project> getProjects() {
         ArrayList<Project> projectsList = new ArrayList<>();

@@ -18,7 +18,7 @@ public class DataProjectsManager implements InterfaceDataProjectsManager {
 	public ArrayList<Projet> getProjects(String username) {
 			if (db.isDirecteur(username))
 				return GetProjects();
-			else if(db.isChef(username))
+			else if(db.isChefProjet(username))
 				return GetProjectsChef();
 			else 
 				return GetProjectsDev();
