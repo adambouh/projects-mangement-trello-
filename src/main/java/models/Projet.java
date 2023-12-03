@@ -95,22 +95,25 @@ public class Projet {
         this.services = services;
     }
 
-   
-    public Projet(String projectName, Date dateBegin, Date dateLivraison, Date datePresentationEquipe,
-            String description, String client) {
-        this.projectName = projectName;
-        this.dateBegin = dateBegin;
-        this.dateLivraison = dateLivraison;
-        this.datePresentationEquipe = datePresentationEquipe;
-        this.description = description;
-        this.client = client;
-        this.equipe = equipe;
-        this.methodologies = methodologies;
-        this.technologies = technologies;
-        this.services = services;
-    }
 
-    public Projet() {
+
+    public Projet(String projectName, Date dateBegin, Date dateLivraison, Date datePresentationEquipe,
+			String description, String client, ArrayList<Developpeur> equipe, ArrayList<Methodologie> methodologies,
+			ArrayList<Technologie> technologies, ArrayList<Services> services) {
+		super();
+		this.projectName = projectName;
+		this.dateBegin = dateBegin;
+		this.dateLivraison = dateLivraison;
+		this.datePresentationEquipe = datePresentationEquipe;
+		this.description = description;
+		this.client = client;
+		this.equipe = equipe;
+		this.methodologies = methodologies;
+		this.technologies = technologies;
+		this.services = services;
+	}
+
+	public Projet() {
         // TODO Auto-generated constructor stub
     }
 }

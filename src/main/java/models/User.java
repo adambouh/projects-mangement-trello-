@@ -17,7 +17,7 @@ public class User {
 	
 	public User(String username, String nom, String prenom, String password, String role, String email,
 			String profilePic) {
-		super();
+	
 		this.username = username;
 		this.nom = nom;
 		this.prenom = prenom;
