@@ -2,6 +2,7 @@ package Vue;
 import controllers.Authenification;
 import java.io.IOException;
 
+import businessLayer.ProjectsManager;
 import dataLayer.DataAccountsManager;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -23,6 +24,8 @@ public class Home extends HttpServlet {
 
 
            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/resource/Vue/home.jsp");
+           ProjectsManager projectsManager = new ProjectsManager();
+           projectsManager.GetProjects();
            dispatcher.forward(request, response);
            
         }

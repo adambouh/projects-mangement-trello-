@@ -1,5 +1,6 @@
 
-
+<%@ page import="models.*" %>
+<%@ page import="businessLayer.*" %>
   <div class="app-header">
     <div class="app-header-left">
       <span  class="app-icon" id="app-icon"></span>
@@ -31,8 +32,11 @@
           <path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg>
       </button>
       <button class="profile-btn" id="profile-btn">
-        <img src="https://assets.codepen.io/3306515/IMG_2025.jpg" />
-        <span>Aybüke C.</span>
+     <%   AccountsManager account = new AccountsManager();%>
+     <% String username=(String) session.getAttribute("username");
+   		  User user = account.getUserByUsername(username);%>
+        <img src="./pics/<%= user != null ? user.getProfilePic() : "default-profile.png" %>"/>
+        <span><%=username %></span>
       </button>
     </div>
     <button class="messages-btn">

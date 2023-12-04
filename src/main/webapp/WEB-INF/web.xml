@@ -12,13 +12,14 @@
     <welcome-file>Register.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
   </welcome-file-list>
-  <servlet-mapping>
-    <servlet-name>default</servlet-name>
-    <url-pattern>/resource/*</url-pattern>
-  </servlet-mapping>
+
   <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>/css/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>/pics/*</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>

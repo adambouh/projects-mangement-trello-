@@ -1,5 +1,50 @@
 <!DOCTYPE html>
 <%@ include file="homehead.jspf"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="models.*" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="businessLayer.ProjectsManager" %>
+
+<%
+    // Assuming you have a method to get projects in your ProjectsManager class
+    ProjectsManager projectsManager = new ProjectsManager();
+    ArrayList<Projet> projects = projectsManager.GetProjects();
+%>
+<%!
+  // Function to darken a color by adjusting its brightness
+  String darkenColor(String color, int vibrancyFactor) {
+	  float[] hsb = new float[3];
+	    java.awt.Color.RGBtoHSB(
+	        Integer.parseInt(color.substring(1, 3), 16),
+	        Integer.parseInt(color.substring(3, 5), 16),
+	        Integer.parseInt(color.substring(5, 7), 16),
+	        hsb
+	    );
+
+	    // Increase saturation and brightness
+	    hsb[1] = Math.min(1.0f, hsb[1] + vibrancyFactor / 100.0f); // Adjust saturation
+	    hsb[2] = Math.min(1.0f, hsb[2] + vibrancyFactor / 100.0f); // Adjust brightness
+	    int darknessFactor = 10; // Adjust this value to control the darkness
+
+	    return darkerColor(String.format("#%06X", java.awt.Color.HSBtoRGB(hsb[0], hsb[1], hsb[2]) & 0xFFFFFF), darknessFactor);
+	  }
+String darkerColor(String color, int factor) {
+    float[] hsb = new float[3];
+    java.awt.Color.RGBtoHSB(
+        Integer.parseInt(color.substring(1, 3), 16),
+        Integer.parseInt(color.substring(3, 5), 16),
+        Integer.parseInt(color.substring(5, 7), 16),
+        hsb
+    );
+
+    // Decrease brightness
+    hsb[2] = Math.max(0.0f, hsb[2] - factor / 100.0f); // Adjust brightness
+
+    return String.format("#%06X", java.awt.Color.HSBtoRGB(hsb[0], hsb[1], hsb[2]) & 0xFFFFFF);
+  }
+%>
+
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
@@ -57,10 +102,21 @@
         </div>
       </div>
       <div class="project-boxes jsGridView">
+<%
+  String[] colors = {"#e9e7fd", "#e9e7fd", "#ffd3e2", "#c8f7dc", "#dbf6fd"};
+
+  for (Projet project : projects) {
+    int randomIndex = (int) (Math.random() * colors.length);
+    String baseColor = colors[randomIndex];
+
+    // Manually adjust brightness for a darker shade
+    int darkenFactor = 50; // Adjust this value to control the darkness
+    String darkerColor = darkenColor(baseColor, darkenFactor);
+%>
       <div class="project-box-wrapper">
-          <div class="project-box" style="background-color: #fee4cb;">
+          <div class="project-box" style="background-color: <%=baseColor%>;">
             <div class="project-box-header">
-              <span>December 10, 2020</span>
+              <span><%=project.getDateBegin() %></span>
               <div class="more-wrapper">
                 <button class="project-btn-more">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
@@ -70,222 +126,35 @@
                 </button>
           </div>
         </div>
-        <div class="project-box-content-header">
-          <p class="box-content-header">Web Designing</p>
-          <p class="box-content-subheader">Prototyping</p>
+        <div class="project-box-content-header"><%System.out.println(project.getProjectName()); %>
+          <p class="box-content-header"><%=project.getProjectName() %></p>
+          <p class="box-content-subheader"><%=project.getDescription()%></p>
         </div>
         <div class="box-progress-wrapper">
           <p class="box-progress-header">Progress</p>
           <div class="box-progress-bar">
-            <span class="box-progress" style="width: 60%; background-color: #ff942e"></span>
+            <span class="box-progress" style="width: <%=project.calculateProgress()%>%; background-color: <%=darkerColor%>;"></span>
           </div>
-          <p class="box-progress-percentage">60%</p>
+          <p class="box-progress-percentage"><%=project.calculateProgress()%>%</p>
         </div>
         <div class="project-box-footer">
           <div class="participants">
-            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="participant">
-            <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="participant">
-            <button class="add-participant" style="color: #ff942e;">
+          <% for (User team : project.getEquipe()) { %>
+            <img src="./pics/<%=team.getProfilePic()%>" alt="participant">
+          <%}%>  <button class="add-participant" style="color: <%=darkerColor%>;">
               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
                 <path d="M12 5v14M5 12h14" />
               </svg>
             </button>
           </div>
-          <div class="days-left" style="color: #ff942e;">
+          <div class="days-left" style="color: <%=darkerColor%>;">
             2 Days Left
           </div>
         </div>
       </div>
-    </div>
-      <div class="project-box-wrapper">
-      <div class="project-box" style="background-color: #e9e7fd;">
-        <div class="project-box-header">
-          <span>December 10, 2020</span>
-          <div class="more-wrapper">
-            <button class="project-btn-more">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
-                <circle cx="12" cy="12" r="1" />
-                <circle cx="12" cy="5" r="1" />
-                <circle cx="12" cy="19" r="1" /></svg>
-            </button>
-          </div>
-        </div>
-        <div class="project-box-content-header">
-          <p class="box-content-header">Testing</p>
-          <p class="box-content-subheader">Prototyping</p>
-        </div>
-        <div class="box-progress-wrapper">
-          <p class="box-progress-header">Progress</p>
-          <div class="box-progress-bar">
-            <span class="box-progress" style="width: 50%; background-color: #4f3ff0"></span>
-          </div>
-          <p class="box-progress-percentage">50%</p>
-        </div>
-        <div class="project-box-footer">
-          <div class="participants">
-            <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80" alt="participant">
-            <img src="https://images.unsplash.com/photo-1583195764036-6dc248ac07d9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2555&q=80" alt="participant">
-            <button class="add-participant" style="color: #4f3ff0;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-            </button>
-          </div>
-          <div class="days-left" style="color: #4f3ff0;">
-            2 Days Left
-          </div>
-        </div>
+    </div>    <%}%> 
       </div>
-    </div>
-    
-   	  <div class="project-box-wrapper">
-      <div class="project-box">
-        <div class="project-box-header">
-          <span>December 10, 2020</span>
-          <div class="more-wrapper">
-            <button class="project-btn-more">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
-                <circle cx="12" cy="12" r="1" />
-                <circle cx="12" cy="5" r="1" />
-                <circle cx="12" cy="19" r="1" /></svg>
-            </button>
-          </div>
-        </div>
-        <div class="project-box-content-header">
-          <p class="box-content-header">Svg Animations</p>
-          <p class="box-content-subheader">Prototyping</p>
-        </div>
-        <div class="box-progress-wrapper">
-          <p class="box-progress-header">Progress</p>
-          <div class="box-progress-bar">
-            <span class="box-progress" style="width: 80%; background-color: #096c86"></span>
-          </div>
-          <p class="box-progress-percentage">80%</p>
-        </div>
-        <div class="project-box-footer">
-          <div class="participants">
-            <img src="https://images.unsplash.com/photo-1587628604439-3b9a0aa7a163?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjR8fHdvbWFufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="participant">
-            <img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80" alt="participant">
-            <button class="add-participant" style="color: #096c86;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-            </button>
-          </div>
-          <div class="days-left" style="color: #096c86;">
-            2 Days Left
-          </div>
-        </div>
-      </div>
-    </div>
-      <div class="project-box-wrapper">
-      <div class="project-box" style="background-color: #ffd3e2;">
-        <div class="project-box-header">
-          <span>December 10, 2020</span>
-          <div class="more-wrapper">
-            <button class="project-btn-more">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
-                <circle cx="12" cy="12" r="1" />
-                <circle cx="12" cy="5" r="1" />
-                <circle cx="12" cy="19" r="1" /></svg>
-            </button>
-          </div>
-        </div>
-        <div class="project-box-content-header">
-          <p class="box-content-header">UI Development</p>
-          <p class="box-content-subheader">Prototyping</p>
-        </div>
-        <div class="box-progress-wrapper">
-          <p class="box-progress-header">Progress</p>
-          <div class="box-progress-bar">
-            <span class="box-progress" style="width: 20%; background-color: #df3670"></span>
-          </div>
-          <p class="box-progress-percentage">20%</p>
-        </div>
-        <div class="project-box-footer">
-          <div class="participants">
-            <img src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="participant">
-            <img src="https://images.unsplash.com/photo-1587628604439-3b9a0aa7a163?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjR8fHdvbWFufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" alt="participant">
-            <button class="add-participant" style="color: #df3670;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-            </button>
-          </div>
-          <div class="days-left" style="color: #df3670;">
-            2 Days Left
-          </div>
-        </div>
-      </div>
-    </div>
-   	  <div class="project-box-wrapper">
-      <div class="project-box" style="background-color: #c8f7dc;">
-        <div class="project-box-header">
-          <span>December 10, 2020</span>
-          <div class="more-wrapper">
-            <button class="project-btn-more">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
-                <circle cx="12" cy="12" r="1" />
-                <circle cx="12" cy="5" r="1" />
-                <circle cx="12" cy="19" r="1" /></svg>
-            </button>
-          </div>
-        </div>
-        <div class="project-box-content-header">
-          <p class="box-content-header">Data Analysis</p>
-          <p class="box-content-subheader">Prototyping</p>
-        </div>
-        <div class="box-progress-wrapper">
-          <p class="box-progress-header">Progress</p>
-          <div class="box-progress-bar">
-            <span class="box-progress" style="width: 60%; background-color: #34c471"></span>
-          </div>
-          <p class="box-progress-percentage">60%</p>
-        </div>
-        <div class="project-box-footer">
-          <div class="participants">
-            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="participant">
-             <div class="project-box-wrapper">
-      <div class="project-box" style="background-color: #d5deff;">
-        <div class="project-box-header">
-          <span>December 10, 2020</span>
-          <div class="more-wrapper">
-            <button class="project-btn-more">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
-                <circle cx="12" cy="12" r="1" />
-                <circle cx="12" cy="5" r="1" />
-                <circle cx="12" cy="19" r="1" /></svg>
-            </button>
-          </div>
-        </div>
-        <div class="project-box-content-header">
-          <p class="box-content-header">Web Designing</p>
-          <p class="box-content-subheader">Prototyping</p>
-        </div>
-        <div class="box-progress-wrapper">
-          <p class="box-progress-header">Progress</p>
-          <div class="box-progress-bar">
-            <span class="box-progress" style="width: 40%; background-color: #4067f9"></span>
-          </div>
-          <p class="box-progress-percentage">40%</p>
-        </div>
-        <div class="project-box-footer">
-          <div class="participants">
-            <img src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80" alt="participant">
-            <img src="https://images.unsplash.com/photo-1583195764036-6dc248ac07d9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2555&q=80" alt="participant">
-            <button class="add-participant" style="color: #4067f9;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-            </button>
-          </div>
-          <div class="days-left" style="color: #4067f9;">
-            2 Days Left
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  
 </div>
 
 </div>

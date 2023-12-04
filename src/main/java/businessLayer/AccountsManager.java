@@ -13,6 +13,10 @@ public class AccountsManager implements InterfaceAccountsManager  {
 		// TODO Auto-generated method stub
 		db.AddAccount(p);
 	}
+	public User getUserByUsername(String userName) {
+		// TODO Auto-generated method stub
+		return db.getUserByUsername( userName);
+	}
 
 	@Override
 	public void AddAccount(String userName, String password) {
@@ -45,7 +49,7 @@ public class AccountsManager implements InterfaceAccountsManager  {
 		return db.isDirecteur(username);
 	}
 	public boolean isChefDeProjet(String username){
-		return db.isChefDeProjet(username);
+		return db.isChefProjet(username);
 	}
 	
 	

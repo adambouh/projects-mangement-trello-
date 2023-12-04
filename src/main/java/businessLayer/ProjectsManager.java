@@ -16,6 +16,9 @@ public class ProjectsManager implements InterfaceProjectsManager  {
 	public  ArrayList<Projet> getProjects(String username){
 		return db.getProjects(username);
 	}
+	public   ArrayList<Projet> GetProjects(){
+		return db.GetProjects();
+	}
 	
 
 

@@ -3,15 +3,17 @@ package dataLayer;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import com.mysql.cj.protocol.Resultset;
 
-import models.Account;
 import models.User;
 import db.DbConnection;
 public class DataAccountsManager implements InterfaceDataAccountsManager {
 	static Hashtable<String, String> table=new Hashtable<String, String>();
+	static ArrayList<User> users=new ArrayList<>();
+
 	@Override
 	public void AddAccount(User p) {
 	    System.out.println("Adding account: " + p.getUsername() + ", " + p.getPassword());
@@ -78,7 +80,7 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 	public Hashtable<String, String> GetAccounts() {
 	    table.clear(); // Clear the existing data
 	    try {
-	        ResultSet resultSet = DbConnection.getUSers();
+	        ResultSet resultSet = DbConnection.getUsers();
 	        while (resultSet.next()) {
 	            String username = resultSet.getString("username");
 	            String password = resultSet.getString("password");
@@ -91,6 +93,39 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 	        e.printStackTrace();
 	    }
 	    return table;
+	}
+	 
+		@Override
+		public ArrayList<User> getUsers() {
+		    users.clear(); // Clear the existing data
+		    try {
+		        ResultSet resultSet = DbConnection.getUsers();
+		        while (resultSet.next()) {
+		            String username = resultSet.getString("Username");
+		               
+	                String password = resultSet.getString("password");
+	                String role = resultSet.getString("role");
+	                String email = resultSet.getString("email");
+	                String profilePic = resultSet.getString("ProfilePic");
+
+	                User user = new User(username, "nom", "prenom", password, role, email, profilePic);
+	                users.add(user);
+		        }
+		        return users;
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return users;
+		}
+	 public User getUserByUsername(String username) {
+		 		getUsers();
+	        for (User user : users) {
+	            if (user.getUsername().equals(username)) {
+	                return user; // Found the user
+	            }
+	        }
+	        return null; // User with the specified username not found
+	    }
 	}
 	
 

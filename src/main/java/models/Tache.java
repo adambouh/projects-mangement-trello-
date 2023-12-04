@@ -11,6 +11,30 @@ public class Tache{
 		this.done=done;
 	}
 
+	public User getDev() {
+		return dev;
+	}
+
+	public void setDev(User dev) {
+		this.dev = dev;
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	public void setName(String name) {
+		Name = name;
+	}
+
+	public boolean isDone() {
+		return done;
+	}
+
+	public void setDone(boolean done) {
+		this.done = done;
+	}
+
 
 
     

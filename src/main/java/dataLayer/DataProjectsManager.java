@@ -12,13 +12,13 @@ import models.Projet;
 import models.User;
 
 public class DataProjectsManager implements InterfaceDataProjectsManager {
-	DataAccountsManager db=new 	DataAccountsManager();
+	DataAccountsManager Users=new 	DataAccountsManager();
 	ArrayList<Projet> table = new ArrayList<Projet>();
 	@Override
 	public ArrayList<Projet> getProjects(String username) {
-			if (db.isDirecteur(username))
+			if (Users.isDirecteur(username))
 				return GetProjects();
-			else if(db.isChefProjet(username))
+			else if(Users.isChefProjet(username))
 				return GetProjectsChef();
 			else 
 				return GetProjectsDev();
@@ -35,26 +35,19 @@ public class DataProjectsManager implements InterfaceDataProjectsManager {
 	}
 	@Override
 	public ArrayList<Projet> GetProjects() {
-		// TODO Auto-generated method stub
-		   table.clear(); // Clear the existing data
-		    try {
-		        ResultSet resultSet =DbConnection.getProjects();
-		        while (resultSet.next()) {
-		        	//get attributes of project 
-		            String username = resultSet.getString("username");
-		            String password = resultSet.getString("password");
-		            String role = resultSet.getString("role");
+	    // Clear the existing data
+	    table.clear();
+	    
+	    // Get projects from the database
+	    table = DbConnection.getProjects();
 
-		            Projet p = new Projet();
-		            AddProject(p);
-		        }
-		        return table;
-		    } catch (SQLException e) {
-		        e.printStackTrace();
-		    }
-		    return table;
-		
+	    // Print or display the projects
+	    for (Projet projet : table) {
+	        System.out.println("Project ID: " + projet);
+	    }
+	    return table;
 	}
+
 	@Override
 	public void AddProject(Projet p) {
 		

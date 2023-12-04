@@ -44,6 +44,7 @@ public class DbConnection {
     }
 
     public static User getUserById(String id) {
+    	System.out.println(id);
         User user = null;
         try {
             Connection conn = getConnection();
@@ -54,19 +55,14 @@ public class DbConnection {
 
             if (resultSet.next()) {
                 String username = resultSet.getString("Username");
-                String nom = resultSet.getString("nom");
-                String prenom = resultSet.getString("prenom");
+               
                 String password = resultSet.getString("password");
                 String role = resultSet.getString("role");
                 String email = resultSet.getString("email");
                 String profilePic = resultSet.getString("ProfilePic");
 
-                user = new User(username, nom, prenom, password, role, email, profilePic);
+                user = new User(username, "nom", "prenom", password, role, email, profilePic);
             }
-
-            resultSet.close();
-            preparedStatement.close();
-            conn.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -90,10 +86,7 @@ public class DbConnection {
                 technologie = new Technologie(technologieName);
             }
 
-            resultSet.close();
-            preparedStatement.close();
-            conn.close();
-
+           
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Error fetching technology by ID");
@@ -116,9 +109,6 @@ public class DbConnection {
                 methodologie = new Methodologie(methodologieName);
             }
 
-            resultSet.close();
-            preparedStatement.close();
-            conn.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -138,17 +128,15 @@ public class DbConnection {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                String name = resultSet.getString("name");
+                //String name = resultSet.getString("name");
                 String description = resultSet.getString("description");
-                int duree = resultSet.getInt("duree");
+                int duree = resultSet.getInt("DurationInDays");
                 ArrayList<Tache> taches = getTachesForService(id);
 
-                service = new Services(name, description, duree, taches);
+                service = new Services("name", description, duree, taches);
             }
 
-            resultSet.close();
-            preparedStatement.close();
-            conn.close();
+            
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -176,9 +164,7 @@ public class DbConnection {
                 taches.add(tache);
             }
 
-            resultSet.close();
-            preparedStatement.close();
-            conn.close();
+           
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -207,44 +193,38 @@ public class DbConnection {
             String query = "SELECT * FROM projects";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
             while (resultSet.next()) {
                 String projectID = resultSet.getString("ProjectID");
                 String projectName = resultSet.getString("ProjectName");
                 String description = resultSet.getString("Description");
                 String client = resultSet.getString("Client");
-                String duration =resultSet.getString("DevelopmentDays");
                 String projectManagerID = resultSet.getString("ProjectManagerID");
+                int duration = resultSet.getInt("DevelopmentDays");
 
+                // Parse dates
+                Date startDate = resultSet.getString("StartDate") != null ?
+                        dateFormat.parse(resultSet.getString("StartDate")) : null;
+                Date deliveryDate = resultSet.getString("DeliveryDate") != null ?
+                        dateFormat.parse(resultSet.getString("DeliveryDate")) : null;
 
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+   
+                // Get the project manager
+                User manager = getUserById(projectManagerID);
 
-                        Date startDate = resultSet.getString("StartDate") != null ?
-                                dateFormat.parse(resultSet.getString("StartDate")) : null;
-                        Date deliveryDate = resultSet.getString("DeliveryDate") != null ?
-                                dateFormat.parse(resultSet.getString("DeliveryDate")) : null;
-                        
-                        
+                // Get team members, methodologies, technologies, and services
+                ArrayList<User> team = getTeamMembers(projectID);
+                ArrayList<Methodologie> methodologies = getProjectMethodologies(projectID);
+                ArrayList<Technologie> technologies = getProjectTechnologies(projectID);
+                ArrayList<Services> services = getProjectServices(projectID);
 
-                        // Calculate duration in days
-                        long durationInDays = startDate != null && deliveryDate != null ?
-                                (deliveryDate.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000) : 0;
-
-                        User manager = getUserById(projectManagerID);
-                        ArrayList<User> team = getTeamMembers(projectID);
-                        ArrayList<Methodologie> methodologies = getProjectMethodologies(projectID);
-                        ArrayList<Technologie> technologies = getProjectTechnologies(projectID);
-                        ArrayList<Services> services = getProjectServices(projectID);
-
-                        // Create a Project object with parsed dates and duration
-                        Projet project = new Projet(projectName, startDate, deliveryDate, duration,manager,
-                                description, client, team, methodologies, technologies, services);
-                        projectsList.add(project);
+                // Create a Project object with parsed dates and duration
+                Projet project = new Projet(projectName, startDate, deliveryDate, duration, description, client, team, methodologies, technologies, services);
+                projectsList.add(project);
             }
 
-            resultSet.close();
-            preparedStatement.close();
-            conn.close();
+
         }
             catch (SQLException | ParseException e) {
                 e.printStackTrace();
@@ -258,19 +238,19 @@ public class DbConnection {
         ArrayList<User> team = new ArrayList<>();
 
         try {
+        	System.out.println(projectID);
             Connection conn = getConnection();
-            String teamQuery = "SELECT UserID FROM ProjectDevelopers WHERE ProjectID = ?";
+            String teamQuery = "SELECT DeveloperID FROM ProjectDevelopers WHERE ProjectID = ?";
             PreparedStatement teamStatement = conn.prepareStatement(teamQuery);
+            System.out.println(teamStatement);
             teamStatement.setString(1, projectID);
+           
             ResultSet teamResultSet = teamStatement.executeQuery();
 
             while (teamResultSet.next()) {
-                team.add(getUserById(teamResultSet.getString("UserID")));
+                team.add(getUserById(teamResultSet.getString("DeveloperID")));
             }
-
-            teamResultSet.close();
-            teamStatement.close();
-            conn.close();
+            
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -294,9 +274,6 @@ public class DbConnection {
                 methodologies.add(getMethodologieById(methodologyResultSet.getString("MethodologyID")));
             }
 
-            methodologyResultSet.close();
-            methodologyStatement.close();
-            conn.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -320,9 +297,6 @@ public class DbConnection {
                 technologies.add(getTechnologieById(technologyResultSet.getString("TechnologyID")));
             }
 
-            technologyResultSet.close();
-            technologyStatement.close();
-            conn.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -345,10 +319,6 @@ public class DbConnection {
             while (serviceResultSet.next()) {
                 services.add(getServiceById(serviceResultSet.getString("ServiceID")));
             }
-
-            serviceResultSet.close();
-            serviceStatement.close();
-            conn.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
