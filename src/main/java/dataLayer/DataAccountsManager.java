@@ -8,12 +8,11 @@ import java.util.Hashtable;
 
 import com.mysql.cj.protocol.Resultset;
 
-import models.User;
+import models.*;
 import db.DbConnection;
 public class DataAccountsManager implements InterfaceDataAccountsManager {
 	static Hashtable<String, String> table=new Hashtable<String, String>();
 	static ArrayList<User> users=new ArrayList<>();
-
 	@Override
 	public void AddAccount(User p) {
 	    System.out.println("Adding account: " + p.getUsername() + ", " + p.getPassword());
@@ -24,7 +23,6 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 	        System.out.println("Username or password is null");
 	    }
 	}
-
 	@Override
 	public boolean ValidateAccount(User p) {
 	    GetAccounts();
@@ -50,7 +48,8 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 	        return false;
 	    }
 	}
-	 public boolean isDirecteur(String username) {
+	@Override 
+	public boolean isDirecteur(String username) {
 		    String userRole;
 		    try {
 		        ResultSet resultSet = DbConnection.getUserRole(username);
@@ -61,21 +60,10 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 		    }
 		    return "Directeur".equals(userRole);
 		}
-
-		public boolean isChefProjet(String username) {
-		    String userRole;
-		    try {
-		        ResultSet resultSet = DbConnection.getUserRole(username);
-		        userRole = resultSet.next() ? resultSet.getString("Role") : null;
-		    } catch (SQLException e) {
-		        e.printStackTrace();
-		        userRole = null;
-		    }
-		    return "Chef de Projet".equals(userRole);
+	@Override
+	public boolean isChefProjet(String username,Projet p ) {
+		    return getUserByUsername(username).equals(p.getManager());
 		}
-	 
-
-	 
 	@Override
 	public Hashtable<String, String> GetAccounts() {
 	    table.clear(); // Clear the existing data
@@ -93,10 +81,9 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 	        e.printStackTrace();
 	    }
 	    return table;
-	}
-	 
-		@Override
-		public ArrayList<User> getUsers() {
+	} 
+	@Override
+	public ArrayList<User> getUsers() {
 		    users.clear(); // Clear the existing data
 		    try {
 		        ResultSet resultSet = DbConnection.getUsers();
@@ -117,7 +104,8 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 		    }
 		    return users;
 		}
-	 public User getUserByUsername(String username) {
+	@Override
+	public User getUserByUsername(String username) {
 		 		getUsers();
 	        for (User user : users) {
 	            if (user.getUsername().equals(username)) {

@@ -18,11 +18,7 @@ import dataLayer.DataAccountsManager;
 @WebServlet("/Authenification")
 public class Authenification extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	
-   
-	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {}
 	public static boolean validateCredentials(String username, String password) {
 	      // another class
 	    	User user = new User(username, password);
@@ -43,5 +39,7 @@ public class Authenification extends HttpServlet {
 	static public boolean isconnected(String username) {
 		DataAccountsManager dataManager = new DataAccountsManager();
 		  return dataManager.IsUser(username);	}
-	
-}
+
+		
+	}
+

@@ -220,7 +220,7 @@ public class DbConnection {
                 ArrayList<Services> services = getProjectServices(projectID);
 
                 // Create a Project object with parsed dates and duration
-                Projet project = new Projet(projectName, startDate, deliveryDate, duration, description, client, team, methodologies, technologies, services);
+                Projet project = new Projet(projectName, startDate, deliveryDate, duration, description, client,manager ,team, methodologies, technologies, services);
                 projectsList.add(project);
             }
 

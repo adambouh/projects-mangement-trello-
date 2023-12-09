@@ -3,6 +3,7 @@ package businessLayer;
 import java.util.Hashtable;
 
 import dataLayer.DataAccountsManager;
+import models.Projet;
 import models.User;
 
 public class AccountsManager implements InterfaceAccountsManager  {
@@ -44,12 +45,13 @@ public class AccountsManager implements InterfaceAccountsManager  {
 		// TODO Auto-generated method stub
 		return db.GetAccounts();
 	}
-	
+	@Override
 	public boolean isDirecteur(String username){
 		return db.isDirecteur(username);
 	}
-	public boolean isChefDeProjet(String username){
-		return db.isChefProjet(username);
+	@Override
+	public boolean isChefDeProjet(String username,Projet p){
+		return isChefDeProjet(username, p);
 	}
 	
 	

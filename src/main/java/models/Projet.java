@@ -13,6 +13,7 @@ public class Projet {
     private int  duration;
     private String description;
     private String client;
+    private User manager;
     private ArrayList<User> equipe;
     private ArrayList<Methodologie> methodologies;
     private ArrayList<Technologie> technologies;
@@ -21,7 +22,7 @@ public class Projet {
 
 
 	public Projet(String projectName, Date dateBegin, Date dateLivraison, int duration, String description,
-			String client, ArrayList<User> equipe, ArrayList<Methodologie> methodologies,
+			String client,User manager ,ArrayList<User> equipe, ArrayList<Methodologie> methodologies,
 			ArrayList<Technologie> technologies, ArrayList<Services> services) {
 		super();
 		this.projectName = projectName;
@@ -30,6 +31,7 @@ public class Projet {
 		this.duration = duration;
 		this.description = description;
 		this.client = client;
+		this.manager = manager;
 		this.equipe = equipe;
 		this.methodologies = methodologies;
 		this.technologies = technologies;
@@ -79,8 +81,16 @@ public class Projet {
 
         return stringBuilder.toString();
     }
+   
+    public User getManager() {
+		return manager;
+	}
 
-    private String formatDate(Date date) {
+	public void setManager(User manager) {
+		this.manager = manager;
+	}
+
+	private String formatDate(Date date) {
         if (date == null) {
             return "N/A";
         }
