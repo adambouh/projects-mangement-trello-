@@ -65,7 +65,7 @@ String darkerColor(String color, int factor) {
     <div class="projects-section">
       <div class="projects-section-header">
         <p>Projects</p>
-        <p class="time">December, 12</p>
+        <p class="time"><%=new Date() %></p>
       </div>
       <div class="projects-section-line">
         <div class="projects-status">
@@ -105,25 +105,29 @@ String darkerColor(String color, int factor) {
 <%
   String[] colors = {"#e9e7fd", "#e9e7fd", "#ffd3e2", "#c8f7dc", "#dbf6fd"};
 
-  for (Projet project : projects) {
-    int randomIndex = (int) (Math.random() * colors.length);
-    String baseColor = colors[randomIndex];
+for (Projet project : projects) {
+  int randomIndex = (int) (Math.random() * colors.length);
+  String baseColor = colors[randomIndex];
 
-    // Manually adjust brightness for a darker shade
-    int darkenFactor = 50; // Adjust this value to control the darkness
-    String darkerColor = darkenColor(baseColor, darkenFactor);
+  // Manually adjust brightness for a darker shade
+  int darkenFactor = 50; // Adjust this value to control the darkness
+  String darkerColor = darkenColor(baseColor, darkenFactor);
 %>
-      <div class="project-box-wrapper">
-          <div class="project-box" style="background-color: <%=baseColor%>;">
-            <div class="project-box-header">
-              <span><%=project.getDateBegin() %></span>
-              <div class="more-wrapper">
-                <button class="project-btn-more">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
-                    <circle cx="12" cy="12" r="1" />
-                    <circle cx="12" cy="5" r="1" />
-                    <circle cx="12" cy="19" r="1" /></svg>
-                </button>
+<div class="project-box-wrapper">
+<div class="project-box" style="background-color: <%=baseColor%>;">
+  <div class="project-box-header">
+    <span><%=project.getDateBegin() %></span>
+    <div class="more-wrapper">
+      <button class="project-btn-more" onclick="toggleDropdown('<%=project.getId()%>')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+          <circle cx="12" cy="12" r="1" />
+          <circle cx="12" cy="5" r="1" />
+          <circle cx="12" cy="19" r="1" />
+        </svg>
+      </button>
+      <div id="dropdown<%=project.getId()%>" class="dropdown-content">
+        <a href="#" onclick="deleteProject('<%=project.getId()%>')">Delete</a>
+      </div>
           </div>
         </div>
         <div class="project-box-content-header"><%System.out.println(project.getProjectName()); %>
@@ -159,8 +163,74 @@ String darkerColor(String color, int factor) {
 
 </div>
 </div>
+<style>
+/* Style the dropdown button and content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* Style the dropdown links */
+.dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    display: block;
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
+</style>
 <!-- partial -->
   <script  src="./css/script.js"></script>
+  <script>
 
+  function deleteProject(projectId) {
+    // Implement your delete logic here for the specific project identified by projectId
+    alert(`Deleting project ${projectId}...`);
+    // You can make an AJAX request or perform any other actions as needed
+  }
+
+
+  function toggleDropdown(projectId) {
+	    const dropdown = document.getElementById("dropdown"+projectId);
+	    console.log("dropdown"+projectId);
+	    // Check if the dropdown element exists before accessing its classList
+	    if (dropdown) {
+	        const displayStyle = window.getComputedStyle(dropdown).getPropertyValue('display');
+	        if (displayStyle === "block") {
+	            dropdown.style.display = "none";
+	        } else {
+	        	closeAllDropdowns();
+	            dropdown.style.display = "block";
+	        }
+	    }
+	}
+  function closeAllDropdowns() {
+	    const dropdowns = document.getElementsByClassName('dropdown-content');
+	    for (let i = 0; i < dropdowns.length; i++) {
+	        const openDropdown = dropdowns[i];
+	        if (window.getComputedStyle(openDropdown).getPropertyValue('display') === "block") {
+	            openDropdown.style.display = "none";
+	        }
+	    }
+	}
+</script>
+	
 </body>
 </html>

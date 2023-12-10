@@ -1,5 +1,6 @@
 package businessLayer;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import dataLayer.DataAccountsManager;
@@ -7,7 +8,7 @@ import models.Projet;
 import models.User;
 
 public class AccountsManager implements InterfaceAccountsManager  {
-
+	public AccountsManager(){}
 	DataAccountsManager db=new 	DataAccountsManager();
 	@Override
 	public void AddAccount(User p) {
@@ -38,8 +39,11 @@ public class AccountsManager implements InterfaceAccountsManager  {
 		// TODO Auto-generated method stub
 		return db.ValidateAccount(p);
 	}
+	@Override
+	public User getUserbyUsername(String username) {
+		return db.getUserByUsername(username);
+	}
 	
-
 	@Override
 	public Hashtable<String, String> GetAccounts() {
 		// TODO Auto-generated method stub
@@ -51,10 +55,13 @@ public class AccountsManager implements InterfaceAccountsManager  {
 	}
 	@Override
 	public boolean isChefDeProjet(String username,Projet p){
-		return isChefDeProjet(username, p);
+		return db.isChefProjet(username, p);
 	}
-	
-	
+	@Override
+	public ArrayList<User> getDevs(){
+		return db.getDevs();
+
+	}
 	
 
 }

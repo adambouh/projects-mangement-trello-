@@ -16,5 +16,6 @@ public interface InterfaceDataAccountsManager {
 
 	User getUserByUsername(String username);
 	boolean isChefProjet(String username, Projet p);
+	ArrayList<User> getDevs();
 	
 }

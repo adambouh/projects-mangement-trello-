@@ -4,9 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import models.User;
 public class Projet {
+	private int id ;
     private String projectName;
     private Date dateBegin;
     private Date dateLivraison;
@@ -21,10 +23,17 @@ public class Projet {
 
 
 
-	public Projet(String projectName, Date dateBegin, Date dateLivraison, int duration, String description,
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Projet(String Id,String projectName, Date dateBegin, Date dateLivraison, int duration, String description,
 			String client,User manager ,ArrayList<User> equipe, ArrayList<Methodologie> methodologies,
 			ArrayList<Technologie> technologies, ArrayList<Services> services) {
 		super();
+		this.id=Integer.parseInt(Id);
 		this.projectName = projectName;
 		this.dateBegin = dateBegin;
 		this.dateLivraison = dateLivraison;
@@ -37,7 +46,23 @@ public class Projet {
 		this.technologies = technologies;
 		this.services = services;
 	}
-
+	public Projet(String projectName, Date dateBegin, Date dateLivraison,String description,
+			String client,User manager) {
+		super();
+		this.projectName = projectName;
+		this.dateBegin = dateBegin;
+		this.dateLivraison = dateLivraison;
+		
+		this.duration =calculateDuration(dateLivraison,dateBegin) ;
+		this.description = description;
+		this.client = client;
+		this.manager = manager;
+	}
+	 private int calculateDuration(Date startDate, Date endDate) {
+	        // Calculate the duration between two dates in days
+	        long diffInMillies = Math.abs(endDate.getTime() - startDate.getTime());
+	        return (int) TimeUnit.DAYS.convert(diffInMillies, TimeUnit.DAYS);
+	    }
 	public Projet() {
         // TODO Auto-generated constructor stub
     }

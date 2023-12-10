@@ -54,6 +54,7 @@ public class DbConnection {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
+            
                 String username = resultSet.getString("Username");
                
                 String password = resultSet.getString("password");
@@ -61,7 +62,7 @@ public class DbConnection {
                 String email = resultSet.getString("email");
                 String profilePic = resultSet.getString("ProfilePic");
 
-                user = new User(username, "nom", "prenom", password, role, email, profilePic);
+                user = new User(Integer.parseInt(id),username, "nom", "prenom", password, role, email, profilePic);
             }
 
         } catch (SQLException e) {
@@ -220,7 +221,7 @@ public class DbConnection {
                 ArrayList<Services> services = getProjectServices(projectID);
 
                 // Create a Project object with parsed dates and duration
-                Projet project = new Projet(projectName, startDate, deliveryDate, duration, description, client,manager ,team, methodologies, technologies, services);
+                Projet project = new Projet(projectID,projectName, startDate, deliveryDate, duration, description, client,manager ,team, methodologies, technologies, services);
                 projectsList.add(project);
             }
 
@@ -326,5 +327,41 @@ public class DbConnection {
         }
 
         return services;
+    }
+
+    public static void createProject(Projet p) {
+        String insertQuery = "INSERT INTO Projects (ProjectName, Description, Client, StartDate, DeliveryDate, DevelopmentDays, ProjectManagerID) " +
+                             "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
+            preparedStatement.setString(1, p.getProjectName());
+            preparedStatement.setString(2, p.getDescription());
+            preparedStatement.setString(3, p.getClient());
+            preparedStatement.setString(4,parce(p.getDateBegin()));
+            preparedStatement.setString(5,parce(p.getDateLivraison()));
+            preparedStatement.setLong(6, p.getDuration());
+            // Assuming DatePresentation is a property in your Projet class
+            preparedStatement.setInt(7, p.getManager().getId()); // Assuming getUserID() returns the manager's ID
+
+            // Execute the update
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            // Handle any SQL exceptions (e.g., log them)
+            e.printStackTrace();
+        
+    }
+    }
+    public static String  parce(String dateString) {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("MMMM dd, yyyy");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            Date date = inputFormat.parse(dateString);
+            String formattedDate = outputFormat.format(date);
+            	return    formattedDate;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null ;
     }
 }

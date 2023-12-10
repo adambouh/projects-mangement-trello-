@@ -91,7 +91,7 @@
             <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
     </div>  
-    <form action="https://formbold.com/s/FORM_ID" method="POST">
+    <form action="New" method="POST">
       <div>
         <label for="projectName" class="formbold-form-label"> Project Name </label>
         <input type="text" name="projectName" id="projectName" placeholder="Enter project name" class="formbold-form-input" />
@@ -116,15 +116,16 @@
 
       <div>
         <label for="teamLeader" class="formbold-form-label"> Team Leader </label>
-        <select class="formbold-form-input" name="teamLeader" id="teamLeader">
-          <!-- Add options for team leaders here -->
-          <option value="teamLeader1">Team Leader 1</option>
-          <option value="teamLeader2">Ta</option>
-          <option value="teamLeader3">Team Leader 3</option>
-        </select>
+      <select class="formbold-form-input" name="teamLeader" id="teamLeader">
+    <!-- Iterate through the list of users and generate options dynamically -->
+    	<% for (User devs:account.getDevs()) {%>
+        <option value="<%=devs.getUsername() %>"><%=devs.getUsername() %></option>
+        <%} %>
+</select>
+
       </div>
 
-      <button class="formbold-btn" type="submit">Apply Now</button>
+      <button class="formbold-btn" type="submit" value="submit">Apply Now</button>
    </form>
   </div> 
 </div>

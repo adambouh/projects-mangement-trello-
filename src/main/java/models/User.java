@@ -1,6 +1,7 @@
 package models;
 
 public class User {
+	private int Id;
 	private String username;
 	private String nom;
 	private String prenom;
@@ -25,6 +26,25 @@ public class User {
 		this.role = role;
 		this.email = email;
 		this.ProfilePic= profilePic;
+	}
+	public User(int Id,String username, String nom, String prenom, String password, String role, String email,
+			String profilePic) {
+		this.Id = Id;
+		this.username = username;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.password = password;
+		this.role = role;
+		this.email = email;
+		this.ProfilePic= profilePic;
+	}
+
+	public int getId() {
+		return Id;
+	}
+
+	public void setId(int id) {
+		Id = id;
 	}
 
 	public String getEmail() {
