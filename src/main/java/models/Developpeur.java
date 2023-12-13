@@ -3,23 +3,43 @@ package models;
 import java.util.ArrayList;
 
 public class Developpeur extends User {
-    private ArrayList<Methodologie> methodologies;
+    private int Phone;
+    private String About;
+	private ArrayList<Methodologie> methodologies;
     private ArrayList<Technologie> technologies;
     private ArrayList<Tache> taches;
 
-    public Developpeur(String username, String nom, String prenom, String password) {
-        super(username, password);
+    public Developpeur(String username,String nom, String prenom, String email,int phone,String about) {
+        super(username,nom, prenom,email);
+        this.Phone=phone;
+        this.About=about;
         this.methodologies = new ArrayList<>();
         this.technologies = new ArrayList<>();
         this.taches = new ArrayList<>();
     }
+    
 
-    public Developpeur(String username, String password) {
-        super(username, password);
-        this.methodologies = new ArrayList<>();
-        this.technologies = new ArrayList<>();
-        this.taches = new ArrayList<>();
-    }
+    public String getAbout() {
+		return About;
+	}
+
+
+	public void setAbout(String about) {
+		About = about;
+	}
+
+
+	public int getPhone() {
+		return Phone;
+	}
+
+	public void setPhone(int phone) {
+		Phone = phone;
+	}
+
+	 public String getFullName() {
+	        return getNom() + " " + getPrenom();}
+	 
 
     public void addMethodologie(Methodologie methodologie) {
         methodologies.add(methodologie);

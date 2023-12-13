@@ -53,7 +53,12 @@ public class AccountsManager implements InterfaceAccountsManager  {
 	public boolean isChefDeProjet(String username,Projet p){
 		return isChefDeProjet(username, p);
 	}
-	
+	@Override
+	public boolean isDeveloppeur(String username) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	
 	
 

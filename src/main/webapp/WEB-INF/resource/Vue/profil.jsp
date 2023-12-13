@@ -1,9 +1,18 @@
+
 <!DOCTYPE html>
 <%@ include file="homehead.jspf"%>
+<%@ page import="businessLayer.*" %>
+<%@ page import="models.*" %>
+<%
+   
+    AccountsManager accountmanager = new AccountsManager();
+    User user = accountmanager.getUserByUsername((String)session.getAttribute("username"));
+    
+%>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Project Management Dashboard </title>
+  <title>Profile</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   
@@ -16,10 +25,12 @@
 <!-- partial:index.partial.html -->
 <div class="app-container">
 <!--  top barr at homeee -->
-<%@ include file="tophome.jspf"%>
+
   <div class="app-content">
-<%@ include file="side.jspf"%>
-  <div class="projects-section">
+
+
+
+ <div class="projects-section">
 
 <div class="container">
 <div class="row gutters">
@@ -31,13 +42,10 @@
 				<div class="user-avatar">
 					<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
 				</div>
-				<h5 class="user-name">Yuki Hayashi</h5>
-				<h6 class="user-email">yuki@Maxwell.com</h6>
+				<h5 class="user-name"><%= user.getUsername() %></h5>
+				
 			</div>
-			<div class="about">
-				<h5>About</h5>
-				<p>I'm Yuki. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
-			</div>
+			
 		</div>
 	</div>
 </div>
@@ -49,59 +57,55 @@
 			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 				<h6 class="mb-2 text-primary">Personal Details</h6>
 			</div>
+			
 			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-				<div class="form-group">
-					<label for="fullName">Full Name</label>
-					<input type="text" class="form-control" id="fullName" placeholder="Enter full name">
-				</div>
+		<div class="form-group">
+   <label for="fullName"> Name</label>
+   <span class="form-control" id="fullName">GETFULLNAME</span>
+     </div>
 			</div>
 			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-				<div class="form-group">
-					<label for="eMail">Email</label>
-					<input type="email" class="form-control" id="eMail" placeholder="Enter email ID">
-				</div>
+		<div class="form-group">
+   <label for="fullname"> Name</label>
+   <span class="form-control" id="fullName"><%= user.getFullName() %></span>
+     </div>
 			</div>
 			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-				<div class="form-group">
-					<label for="phone">Phone</label>
-					<input type="text" class="form-control" id="phone" placeholder="Enter phone number">
-				</div>
+				  <div class="form-group">
+   <label for="email"> Email</label>
+   <span class="form-control" id="email"><%= user.getEmail() %></span>
+</div>
 			</div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-				<div class="form-group">
-					<label for="website">Website URL</label>
-					<input type="url" class="form-control" id="website" placeholder="Website url">
-				</div>
-			</div>
+		
 		</div>
 		<div class="row gutters">
 			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-				<h6 class="mt-3 mb-2 text-primary">Address</h6>
+				<h6 class="mt-3 mb-2 text-primary">Skills</h6>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				  <div class="form-group">
+                     <ul>
+        <li>Élément 1</li>
+        <li>Élément 2</li>
+        <li>Élément 3</li>
+        <li>Élément 4</li>
+        <li>Élément 5</li>
+    </ul>
+                  </div>
 			</div>
 			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 				<div class="form-group">
-					<label for="Street">Street</label>
-					<input type="name" class="form-control" id="Street" placeholder="Enter Street">
+					  
+       <ul>
+        <li>Élément 1</li>
+        <li>Élément 2</li>
+        <li>Élément 3</li>
+        <li>Élément 4</li>
+        <li>Élément 5</li>
+        </ul>
 				</div>
 			</div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-				<div class="form-group">
-					<label for="ciTy">City</label>
-					<input type="name" class="form-control" id="ciTy" placeholder="Enter City">
-				</div>
-			</div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-				<div class="form-group">
-					<label for="sTate">State</label>
-					<input type="text" class="form-control" id="sTate" placeholder="Enter State">
-				</div>
-			</div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-				<div class="form-group">
-					<label for="zIp">Zip Code</label>
-					<input type="text" class="form-control" id="zIp" placeholder="Zip Code">
-				</div>
-			</div>
+	
 		</div>
 		<div class="row gutters">
 			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -112,6 +116,9 @@
 			</div>
 		</div>
 	</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>

@@ -1,7 +1,8 @@
 package models;
 
 public class User {
-	private String username;
+	
+	private String Username;
 	private String nom;
 	private String prenom;
 	private String password;
@@ -11,20 +12,28 @@ public class User {
 
 	public User(String username, String password) {
 		super();
-		this.username = username;
+		this.Username = username;
 		this.password = password;
 	}
 	
-	public User(String username, String nom, String prenom, String password, String role, String email,
+	public User(String userID, String nom, String prenom, String password, String role, String email,
 			String profilePic) {
 	
-		this.username = username;
+		this.Username = userID;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.password = password;
 		this.role = role;
 		this.email = email;
 		this.ProfilePic= profilePic;
+	}
+	
+
+	public User(String userID,String nom, String prenom, String email) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
 	}
 
 	public String getEmail() {
@@ -50,10 +59,10 @@ public class User {
 		this.role = role;	
 	}
 	public String getUsername() {
-		return username;
+		return Username;
 	}
 	public void setUsername(String username) {
-		this.username = username;
+		this.Username = username;
 	}
 	public String getNom() {
 		return nom;
@@ -73,7 +82,10 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getFullName() {
 	
+	 return prenom + " " + nom;
+	}
 	
 
 }

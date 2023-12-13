@@ -94,7 +94,53 @@ public class DbConnection {
 
         return technologie;
     }
+    
 
+    public static ArrayList<Methodologie> getDeveloperMethodology(String developerID) {
+        ArrayList<Methodologie> methodologies = new ArrayList<>();
+
+        try {
+            Connection conn = getConnection();
+            String query = "SELECT * FROM DeveloperMethodologies WHERE DeveloperID = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, developerID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String methodologyID = resultSet.getString("MethodologyID");
+                methodologies.add(getMethodologieById(methodologyID));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error fetching developer methodologies");
+        }
+
+        return methodologies;
+    }
+    
+    public static ArrayList<Technologie> getDeveloperTechnology(String developerID) {
+        ArrayList<Technologie> technologies = new ArrayList<>();
+
+        try {
+            Connection conn = getConnection();
+            String query = "SELECT * FROM DeveloperTechnologies WHERE DeveloperID = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, developerID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String technologyID = resultSet.getString("TechnologyID");
+                technologies.add(getTechnologieById(technologyID));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error fetching developer technologies");
+        }
+
+        return technologies;
+    }
     public static Methodologie getMethodologieById(String id) {
         Methodologie methodologie = null;
         try {

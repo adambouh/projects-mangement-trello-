@@ -13,4 +13,5 @@ public interface InterfaceAccountsManager {
 	public Hashtable<String, String> GetAccounts();
 	boolean isChefDeProjet(String username, Projet p);
 	boolean isDirecteur(String username);
+	boolean isDeveloppeur(String username);
 }
