@@ -1,5 +1,5 @@
 package controllers;
-import businessLayer.*;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,30 +9,37 @@ import models.Projet;
 import models.User;
 
 import java.io.IOException;
-import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import businessLayer.AccountsManager;
+import businessLayer.ProjectsManager;
 
 /**
- * Servlet implementation class newproject
+ * Servlet implementation class New
  */
-public class Newproject extends HttpServlet {
-	private AccountsManager pr =new AccountsManager();
-	
+public class New extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ProjectsManager projects= new  ProjectsManager();
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Newproject() { 
+    public New() {
         super();
         // TODO Auto-generated constructor stub
     }
-    
+
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("posttttt");
 		  // Extract parameters from the request
+		 AccountsManager pr =new AccountsManager();
+		
+		 ProjectsManager projects= new  ProjectsManager();
         String projectName = request.getParameter("projectName");
         String dateBeginStr = request.getParameter("start");
         String dateLivraisonStr = request.getParameter("end");
@@ -52,7 +59,6 @@ public class Newproject extends HttpServlet {
         
         // Perform any additional actions or forward to another page as needed
         projects.create(newProject);
-        
         // Example: Set the newProject as an attribute in the request and forward to a JSP page
         response.sendRedirect("Home");
 	}
@@ -67,10 +73,6 @@ public class Newproject extends HttpServlet {
             e.printStackTrace();
             return null;
         }
-    }
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	}
 
 }

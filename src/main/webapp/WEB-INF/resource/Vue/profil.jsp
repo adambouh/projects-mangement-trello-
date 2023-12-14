@@ -3,11 +3,11 @@
 <%@ include file="homehead.jspf"%>
 <%@ page import="businessLayer.*" %>
 <%@ page import="models.*" %>
-<%
-   
+<%@ page import="java.util.ArrayList" %>
+ <%  
     AccountsManager accountmanager = new AccountsManager();
     User user = accountmanager.getUserByUsername((String)session.getAttribute("username"));
-    
+    ArrayList<Methodologie> methodologies = accountmanager.getDeveloperMethodology(user.getId());
 %>
 <html lang="en" >
 <head>
@@ -60,12 +60,6 @@
 			
 			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 		<div class="form-group">
-   <label for="fullName"> Name</label>
-   <span class="form-control" id="fullName">GETFULLNAME</span>
-     </div>
-			</div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-		<div class="form-group">
    <label for="fullname"> Name</label>
    <span class="form-control" id="fullName"><%= user.getFullName() %></span>
      </div>
@@ -84,13 +78,17 @@
 			</div>
 			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 				  <div class="form-group">
-                     <ul>
-        <li>Élément 1</li>
-        <li>Élément 2</li>
-        <li>Élément 3</li>
-        <li>Élément 4</li>
-        <li>Élément 5</li>
-    </ul>
+   <ul>
+                                <%
+                                   
+
+                                    for (Methodologie methodology : methodologies) {
+                                %>
+                                <li><%= methodology.getName() %></li>
+                                <%
+                                    }
+                                %>
+                            </ul>
                   </div>
 			</div>
 			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">

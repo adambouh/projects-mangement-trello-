@@ -1,7 +1,9 @@
 package businessLayer;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
+import models.Methodologie;
 import models.Projet;
 import models.User;
 
@@ -14,4 +16,7 @@ public interface InterfaceAccountsManager {
 	boolean isChefDeProjet(String username, Projet p);
 	boolean isDirecteur(String username);
 	boolean isDeveloppeur(String username);
+	User getUserbyUsername(String username);
+	ArrayList<User> getDevs();
+	ArrayList<Methodologie> getDeveloperMethodology(int Id);
 }

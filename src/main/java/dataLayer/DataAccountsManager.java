@@ -88,14 +88,14 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 		    try {
 		        ResultSet resultSet = DbConnection.getUsers();
 		        while (resultSet.next()) {
+		        	int id = resultSet.getInt("UserID");
 		            String username = resultSet.getString("Username");
 		               
 	                String password = resultSet.getString("password");
 	                String role = resultSet.getString("role");
 	                String email = resultSet.getString("email");
 	                String profilePic = resultSet.getString("ProfilePic");
-
-	                User user = new User(username, "nom", "prenom", password, role, email, profilePic);
+	                User user = new User(id,username, "nom", "prenom", password, role, email, profilePic);
 	                users.add(user);
 		        }
 		        return users;
@@ -104,6 +104,17 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 		    }
 		    return users;
 		}
+	@Override
+	public ArrayList<User> getDevs(){
+		ArrayList<User> Devs = new ArrayList<User>();
+		getUsers();
+		for(User user :users) {
+			if (user.getRole().equals("dev")) {
+				Devs.add(user);
+			}
+		}
+		return Devs;
+	}
 	@Override
 	public User getUserByUsername(String username) {
 		 		getUsers();
@@ -114,6 +125,11 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 	        }
 	        return null; // User with the specified username not found
 	    }
+	@Override
+	public ArrayList<Methodologie> getDeveloperMethodology(int id) {
+		// TODO Auto-generated method stub
+		return DbConnection.getDeveloperMethodology(id);
+	}
 	}
 	
 

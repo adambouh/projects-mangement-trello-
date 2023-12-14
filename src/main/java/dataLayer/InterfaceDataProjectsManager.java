@@ -11,4 +11,5 @@ public interface InterfaceDataProjectsManager {
     public ArrayList<Projet> GetProjectsChef();
     public ArrayList<Projet> GetProjectsDev();
     public void AddProject(Projet p) ;
+	void create(Projet p);
 }

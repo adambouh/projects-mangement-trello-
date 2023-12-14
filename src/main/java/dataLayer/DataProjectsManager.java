@@ -50,5 +50,9 @@ public class DataProjectsManager implements InterfaceDataProjectsManager {
 	public void AddProject(Projet p) {
 		
 	}
+	@Override
+	public void  create(Projet p) {
+		DbConnection.createProject(p);
+	}
 
 }

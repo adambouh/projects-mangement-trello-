@@ -104,4 +104,14 @@
     <servlet-name>newproject</servlet-name>
     <url-pattern>/newproject</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>New</display-name>
+    <servlet-name>New</servlet-name>
+    <servlet-class>controllers.New</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>New</servlet-name>
+    <url-pattern>/New</url-pattern>
+  </servlet-mapping>
 </web-app>

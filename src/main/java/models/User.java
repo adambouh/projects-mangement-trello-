@@ -3,6 +3,7 @@ package models;
 public class User {
 	
 	private String Username;
+	private int Id;
 	private String nom;
 	private String prenom;
 	private String password;
@@ -16,6 +17,7 @@ public class User {
 		this.password = password;
 	}
 	
+	
 	public User(String userID, String nom, String prenom, String password, String role, String email,
 			String profilePic) {
 	
@@ -28,12 +30,38 @@ public class User {
 		this.ProfilePic= profilePic;
 	}
 	
-
-	public User(String userID,String nom, String prenom, String email) {
+	
+	public User(int id, String username, String nom, String prenom, String password, String email, String profilePic) {
 		super();
+		Id = id;
+		this.Username = username;
 		this.nom = nom;
 		this.prenom = prenom;
+		this.password = password;
 		this.email = email;
+		ProfilePic = profilePic;
+	}
+
+
+	public User(int Id,String username, String nom, String prenom, String password, String role, String email,
+			String profilePic) {
+		this.Id = Id;
+		this.Username = username;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.password = password;
+		this.role = role;
+		this.email = email;
+		this.ProfilePic= profilePic;
+	}
+	
+
+	public int getId() {
+		return Id;
+	}
+
+	public void setId(int id) {
+		Id = id;
 	}
 
 	public String getEmail() {
