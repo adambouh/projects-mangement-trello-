@@ -113,8 +113,8 @@ for (Projet project : projects) {
   int darkenFactor = 50; // Adjust this value to control the darkness
   String darkerColor = darkenColor(baseColor, darkenFactor);
 %>
-<div class="project-box-wrapper">
-<div class="project-box" style="background-color: <%=baseColor%>;">
+<div class="project-box-wrapper" >
+<div class="project-box" style="background-color: <%=baseColor%>;" onclick="navigateToProject(<%=project.getId()%>)">
   <div class="project-box-header">
     <span><%=project.getDateBegin() %></span>
     <div class="more-wrapper">
@@ -230,6 +230,13 @@ for (Projet project : projects) {
 	        }
 	    }
 	}
+  function navigateToProject(projectId) {
+	    // You can use the projectId parameter to construct the URL or perform other actions
+	    var projectUrl = "project/" + projectId;
+
+	    // Navigate to the specified URL
+	    window.location.href = projectUrl;
+	  }
 </script>
 	
 </body>

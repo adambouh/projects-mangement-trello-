@@ -114,4 +114,14 @@
     <servlet-name>New</servlet-name>
     <url-pattern>/New</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>project</display-name>
+    <servlet-name>project</servlet-name>
+    <servlet-class>Vue.project</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>project</servlet-name>
+    <url-pattern>/project/*</url-pattern>
+  </servlet-mapping>
 </web-app>

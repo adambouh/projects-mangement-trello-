@@ -603,6 +603,7 @@ button, a {
 }
 
 .project-boxes {
+	cursor: pointer;
   margin: 0 -8px;
   overflow-y: auto;
 }
@@ -663,6 +664,7 @@ button, a {
 }
 
 .project-box {
+	cursor:pointer;
   --main-color-card: #dbf6fd;
   border-radius: 30px;
   padding: 16px;
