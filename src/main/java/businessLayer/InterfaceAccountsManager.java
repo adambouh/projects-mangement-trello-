@@ -5,6 +5,7 @@ import java.util.Hashtable;
 
 import models.Methodologie;
 import models.Projet;
+import models.Technologie;
 import models.User;
 
 public interface InterfaceAccountsManager {
@@ -19,4 +20,5 @@ public interface InterfaceAccountsManager {
 	User getUserbyUsername(String username);
 	ArrayList<User> getDevs();
 	ArrayList<Methodologie> getDeveloperMethodology(int Id);
+	ArrayList<Technologie> getDeveloperTechnology(int Id);
 }

@@ -1,6 +1,6 @@
 package dataLayer;
 
-
+import models.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -90,12 +90,13 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 		        while (resultSet.next()) {
 		        	int id = resultSet.getInt("UserID");
 		            String username = resultSet.getString("Username");
-		               
+		            String lastname = resultSet.getString("firstname");
+		            String firstname = resultSet.getString("lastname");
 	                String password = resultSet.getString("password");
 	                String role = resultSet.getString("role");
 	                String email = resultSet.getString("email");
 	                String profilePic = resultSet.getString("ProfilePic");
-	                User user = new User(id,username, "nom", "prenom", password, role, email, profilePic);
+	                User user = new User(id,username, lastname, firstname, password, role, email, profilePic);
 	                users.add(user);
 		        }
 		        return users;
@@ -130,6 +131,17 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 		// TODO Auto-generated method stub
 		return DbConnection.getDeveloperMethodology(id);
 	}
+	@Override
+	public ArrayList<Technologie> getDeveloperTechnology(int id) {
+		// TODO Auto-generated method stub
+		return DbConnection.getDeveloperTechnology(id);
+	}
+	  public void updateUser(User user) {
+	        DbConnection.updateUser(user);
+	    }
+	
+	
+	
 	}
 	
 
