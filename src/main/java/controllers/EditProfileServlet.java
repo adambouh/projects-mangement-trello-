@@ -44,12 +44,13 @@ public class EditProfileServlet extends HttpServlet {
 	    HttpSession session = request.getSession();
 	    User currentUser = accountsManager.getUserByUsername((String)session.getAttribute("username"));
 	    // Obtenez les nouvelles informations de l'utilisateur depuis le formulaire
-	    String newFullName = request.getParameter("newFullName");
+	    String newFirstName = request.getParameter("newFirstName");
+	    String newLastName = request.getParameter("newLastName");
 	    String newEmail = request.getParameter("newEmail");
 
 	    // Mettez à jour les informations de l'utilisateur
-	    currentUser.setFullName(newFullName);
-	    
+	    currentUser.setPrenom(newFirstName);
+	    currentUser.setNom(newLastName);
 	    currentUser.setEmail(newEmail);
 
 	    // Utilisez la classe AccountsManager pour mettre à jour l'utilisateur

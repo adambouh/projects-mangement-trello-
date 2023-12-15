@@ -124,15 +124,24 @@
     <servlet-name>project</servlet-name>
     <url-pattern>/project/*</url-pattern>
   </servlet-mapping>
- 
   <servlet>
     <description></description>
     <display-name>EditProfileServlet</display-name>
     <servlet-name>EditProfileServlet</servlet-name>
     <servlet-class>controllers.EditProfileServlet</servlet-class>
   </servlet>
-<servlet-mapping>
+  <servlet-mapping>
     <servlet-name>EditProfileServlet</servlet-name>
     <url-pattern>/editProfile</url-pattern>
-</servlet-mapping>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditSkillsServlet</display-name>
+    <servlet-name>EditSkillsServlet</servlet-name>
+    <servlet-class>controllers.EditSkills</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditSkillsServlet</servlet-name>
+    <url-pattern>/EditSkillsServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

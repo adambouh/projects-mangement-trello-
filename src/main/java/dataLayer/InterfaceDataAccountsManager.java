@@ -17,5 +17,5 @@ public interface InterfaceDataAccountsManager {
 	ArrayList<User> getDevs();
 	ArrayList<Methodologie> getDeveloperMethodology(int id);
     ArrayList<Technologie> getDeveloperTechnology(int Id);
-	
+    public void updateUser(User user);
 }

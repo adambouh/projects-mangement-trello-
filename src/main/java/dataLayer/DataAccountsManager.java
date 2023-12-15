@@ -90,8 +90,8 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 		        while (resultSet.next()) {
 		        	int id = resultSet.getInt("UserID");
 		            String username = resultSet.getString("Username");
-		            String lastname = resultSet.getString("firstname");
-		            String firstname = resultSet.getString("lastname");
+		            String lastname = resultSet.getString("lastname");
+		            String firstname = resultSet.getString("firstname");
 	                String password = resultSet.getString("password");
 	                String role = resultSet.getString("role");
 	                String email = resultSet.getString("email");
@@ -136,11 +136,28 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 		// TODO Auto-generated method stub
 		return DbConnection.getDeveloperTechnology(id);
 	}
+	@Override
 	  public void updateUser(User user) {
 	        DbConnection.updateUser(user);
 	    }
-	
-	
+	public  int getTechnologyId(String technologyName) {
+		return DbConnection.getTechnologyId(technologyName);
+	}
+	public void addTechnology(String technologyName) {
+	    DbConnection.addTechnology(technologyName);
+	}
+	public void addDeveloperTechnology(int userId, String technologyName) {
+	    DbConnection.addDeveloperTechnology(userId, technologyName);
+	}
+	 public int getMethodologyId(String methodologyName) {
+		    return DbConnection.getMethodologyId(methodologyName);
+		}
+	 public void addMethodology(String methodologyName) {
+		    DbConnection.addMethodology(methodologyName);
+		}
+	 public void addDeveloperMethodology(int userId, String methodologyName) {
+		    DbConnection.addDeveloperMethodology(userId, methodologyName);
+		}
 	
 	}
 	

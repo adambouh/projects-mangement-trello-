@@ -63,10 +63,15 @@
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
         <form method="post" action="editProfile">
             <div class="form-group">
-                <label for="fullname">Name</label>
-                <!-- Ajoutez un champ input désactivé avec un ID -->
-               <input type="text" class="form-control" id="newFullName" name="newFullName" value="<%= user.getFullName() %>" required readonly>
-            </div>
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="newFirstName" name="newFirstName" value="<%= user.getPrenom() %>" required readonly>
+        </div>
+        
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="newLastName" name="newLastName" value="<%= user.getNom() %>" required readonly>
+        </div>
+  
 
             <div class="form-group">
                 <label for="email">Email</label>
@@ -151,7 +156,7 @@
             <!-- Modal Body -->
             <div class="modal-body">
                 <!-- Formulaire pour ajouter de nouvelles technologies et méthodologies -->
-                <form method="post" action="AddSkillsServlet">
+                <form method="post" action="EditSkillsServlet">
                     <!-- Champs de formulaire pour les nouvelles compétences -->
                     <label for="newTechnology">New Technology:</label>
                     <input type="text" id="newTechnology" name="newTechnology" >
@@ -179,7 +184,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script>
     function toggleFormFields(editable) {
-        document.getElementById('newFullName').readOnly = !editable;
+        document.getElementById('newFirstName').readOnly = !editable;
+        document.getElementById('newLastName').readOnly = !editable;
         document.getElementById('newEmail').readOnly = !editable;
         document.getElementById('editDetailsBtn').style.display = editable ? 'none' : 'inline-block';
         document.getElementById('submitDetailsBtn').style.display = editable ? 'inline-block' : 'none';

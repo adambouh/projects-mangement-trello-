@@ -412,18 +412,157 @@ public class DbConnection {
         return null ;
     }
     public static void updateUser(User user) {
-        String updateQuery = "UPDATE Users SET FullName = ?, Email = ? WHERE UserID = ?";
+
+        String updateQuery = "UPDATE Users SET lastname = ?, firstname = ?, Email = ? WHERE UserID = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
-            preparedStatement.setString(1, user.getFullName());
-            preparedStatement.setString(2, user.getEmail());
-            preparedStatement.setInt(3, user.getId());
+            preparedStatement.setString(1, user.getNom());
+            preparedStatement.setString(2, user.getPrenom());
+            preparedStatement.setString(3, user.getEmail());
+            preparedStatement.setInt(4, user.getId());
 
             // Execute the update
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             // Handle any SQL exceptions (e.g., log them)
             e.printStackTrace();
+        }
+    }
+    
+    public static int getTechnologyId(String technologyName) {
+        String query = "SELECT TechnologyID FROM technologies WHERE TechnologyName = ?";
+        
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, technologyName);
+            
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            if (resultSet.next()) {
+                return resultSet.getInt("TechnologyID");
+            } else {
+                return -1; // Retourne -1 si la technologie n'est pas trouvée
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1; // ou jetez une exception personnalisée
+        }
+    }
+
+    public static int addTechnology(String technologyName) {
+        String query = "INSERT INTO technologies (TechnologyName) VALUES (?)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, technologyName);
+
+            int affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Creating technology failed, no rows affected.");
+            }
+
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Creating technology failed, no ID obtained.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1; // or throw a custom exception
+        }
+    }
+    
+    public static void addDeveloperTechnology(int userId, String technologyName) {
+        int technologyId = getTechnologyId(technologyName);
+
+        if (technologyId == -1) {
+            // La technologie n'existe pas encore, ajoutons-la
+            technologyId = addTechnology(technologyName);
+        }
+
+        String query = "INSERT INTO developertechnologies (DeveloperID, TechnologyID) VALUES (?, ?)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, technologyId);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle exception appropriately
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public static int getMethodologyId(String methodologyName) {
+        String query = "SELECT MethodologyID FROM methodologies WHERE MethodologyName = ?";
+        
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, methodologyName);
+            
+            ResultSet resultSet = preparedStatement.executeQuery();
+            
+            if (resultSet.next()) {
+                return resultSet.getInt("MethodologyID");
+            } else {
+                return -1; // Retourne -1 si la méthodologie n'est pas trouvée
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1; // ou jetez une exception personnalisée
+        }
+    }
+    public static int addMethodology(String methodologyName) {
+        String query = "INSERT INTO methodologies (MethodologyName) VALUES (?)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, methodologyName);
+
+            int affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Creating methodology failed, no rows affected.");
+            }
+
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Creating methodology failed, no ID obtained.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1; // or throw a custom exception
+        }
+    }
+    
+    public static void addDeveloperMethodology(int userId, String methodologyName) {
+        int methodologyId = getMethodologyId(methodologyName);
+
+        if (methodologyId == -1) {
+            // La méthodologie n'existe pas encore, ajoutons-la
+            methodologyId = addMethodology(methodologyName);
+        }
+
+        String query = "INSERT INTO developermethodologies (DeveloperID, MethodologyID) VALUES (?, ?)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, methodologyId);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle exception appropriately
         }
     }
 }

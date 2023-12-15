@@ -14,6 +14,7 @@ public interface InterfaceAccountsManager {
 	public Boolean ValidateAccount(String userName, String password);
 	public Boolean ValidateAccount(User p);
 	public Hashtable<String, String> GetAccounts();
+	public void updateUser(User user) ;
 	boolean isChefDeProjet(String username, Projet p);
 	boolean isDirecteur(String username);
 	boolean isDeveloppeur(String username);
