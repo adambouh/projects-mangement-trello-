@@ -49,6 +49,7 @@ public class EditProfileServlet extends HttpServlet {
 
 	    // Mettez à jour les informations de l'utilisateur
 	    currentUser.setFullName(newFullName);
+	    
 	    currentUser.setEmail(newEmail);
 
 	    // Utilisez la classe AccountsManager pour mettre à jour l'utilisateur
