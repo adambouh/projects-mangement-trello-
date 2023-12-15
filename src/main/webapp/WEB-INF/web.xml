@@ -122,7 +122,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>project</servlet-name>
-    <url-pattern>/project/*</url-pattern>
+    <url-pattern>/project</url-pattern>
   </servlet-mapping>
  
   <servlet>

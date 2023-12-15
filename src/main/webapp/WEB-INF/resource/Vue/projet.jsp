@@ -1,8 +1,20 @@
+
+<!DOCTYPE html>
+<%@ include file="homehead.jspf"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="models.*" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="businessLayer.ProjectsManager" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Project Management Dashboard </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="../css/homestyle.css">
+
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,14 +31,25 @@
         <meta name="msapplication-config" content="icons/browserconfig.xml">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <title>Kards | Simple Kanban Board</title>
-    </head>
+ <link rel="stylesheet" href="../css/main.css"> 
+        
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="../css/homestyle.css">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="app-container">
+<!--  top barr at homeee -->
+<%@ include file="tophome.jspf"%>
+
+  <div class="app-content">
+    <%@ include file="side.jspf"%>
+ 
 		<script>console.log("<%= request.getAttribute("id") %>")</script>
-    <body>
-        <header>
-            <div class="header-flex">
+    
+       
+            <div class="header-flex" style="display:none;">
                 <span id="sidebar-button"><i class="fa fa-list"></i></span>
                 <h1 id="title" class="text-align-center">Kards</h1>
                 <span class="title-actions-container" style="font-size:25px;cursor:pointer;letter-spacing: 1ch;">
@@ -40,7 +63,7 @@
                     <i title="Settings" id="settings-button" class="fa fa-gear"></i>
                 </span>
             </div>
-        </header>
+       
         
 
         <div id="sidebar" class="sidenav">
@@ -69,7 +92,7 @@
             <div id="cards-container">
                 <div id="add-card">
                     <input maxlength="128" type="text" id="add-card-text" name="add-card" placeholder="Add Card..." autofocus>
-                    <button id="add-card-button" class="plus-button">+</button>
+        	            <button id="add-card-button" class="plus-button">+</button>
                 </div>
             </div>
         </div>
@@ -90,7 +113,9 @@
                 </div>
             </div>
         </div>
+        </div>
+        </div>
 
-        <script src="js/main.js"></script>
+        <script type="text/javascript" src="../css/js/main.js"></script>
     </body>
 </html>
