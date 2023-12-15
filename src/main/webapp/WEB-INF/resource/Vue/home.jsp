@@ -232,7 +232,7 @@ for (Projet project : projects) {
 	}
   function navigateToProject(projectId) {
 	    // You can use the projectId parameter to construct the URL or perform other actions
-	    var projectUrl = "project-" + projectId;
+	    var projectUrl = "project/" + projectId;
 
 	    // Navigate to the specified URL
 	    window.location.href = projectUrl;

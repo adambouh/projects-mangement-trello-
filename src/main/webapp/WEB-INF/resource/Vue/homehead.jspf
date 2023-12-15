@@ -6,8 +6,3 @@ if (!isAuthenticated){%>
     window.location.replace("Login");
 </script> 
 <%}%>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="models.*" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.util.Date" %>
-<%@ page import="businessLayer.ProjectsManager" %>
