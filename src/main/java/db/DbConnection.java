@@ -56,14 +56,13 @@ public class DbConnection {
             if (resultSet.next()) {
             
                 String username = resultSet.getString("Username");
-                String firstname = resultSet.getString("firstname");
-                String lastname = resultSet.getString("lastname");
+               
                 String password = resultSet.getString("password");
                 String role = resultSet.getString("role");
                 String email = resultSet.getString("email");
                 String profilePic = resultSet.getString("ProfilePic");
 
-                user = new User(Integer.parseInt(id),username, firstname,lastname, password, role, email, profilePic);
+                user = new User(Integer.parseInt(id),username, "nom", "prenom", password, role, email, profilePic);
             }
 
         } catch (SQLException e) {
@@ -121,14 +120,14 @@ public class DbConnection {
         return methodologies;
     }
     
-    public static ArrayList<Technologie> getDeveloperTechnology(int developerID) {
+    public static ArrayList<Technologie> getDeveloperTechnology(String developerID) {
         ArrayList<Technologie> technologies = new ArrayList<>();
 
         try {
             Connection conn = getConnection();
             String query = "SELECT * FROM DeveloperTechnologies WHERE DeveloperID = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setInt(1, developerID);
+            preparedStatement.setString(1, developerID);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -410,20 +409,5 @@ public class DbConnection {
             e.printStackTrace();
         }
         return null ;
-    }
-    public static void updateUser(User user) {
-        String updateQuery = "UPDATE Users SET FullName = ?, Email = ? WHERE UserID = ?";
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
-            preparedStatement.setString(1, user.getFullName());
-            preparedStatement.setString(2, user.getEmail());
-            preparedStatement.setInt(3, user.getId());
-
-            // Execute the update
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            // Handle any SQL exceptions (e.g., log them)
-            e.printStackTrace();
-        }
     }
 }

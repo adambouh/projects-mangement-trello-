@@ -124,15 +124,4 @@
     <servlet-name>project</servlet-name>
     <url-pattern>/project</url-pattern>
   </servlet-mapping>
- 
-  <servlet>
-    <description></description>
-    <display-name>EditProfileServlet</display-name>
-    <servlet-name>EditProfileServlet</servlet-name>
-    <servlet-class>controllers.EditProfileServlet</servlet-class>
-  </servlet>
-<servlet-mapping>
-    <servlet-name>EditProfileServlet</servlet-name>
-    <url-pattern>/editProfile</url-pattern>
-</servlet-mapping>
 </web-app>

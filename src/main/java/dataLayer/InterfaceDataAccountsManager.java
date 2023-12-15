@@ -1,8 +1,11 @@
 package dataLayer;
-import models.*;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import models.Methodologie;
+import models.Projet;
+import models.User;
 
 public interface InterfaceDataAccountsManager {
 	public void AddAccount(User p);
@@ -16,6 +19,5 @@ public interface InterfaceDataAccountsManager {
 	boolean isChefProjet(String username, Projet p);
 	ArrayList<User> getDevs();
 	ArrayList<Methodologie> getDeveloperMethodology(int id);
-    ArrayList<Technologie> getDeveloperTechnology(int Id);
 	
 }

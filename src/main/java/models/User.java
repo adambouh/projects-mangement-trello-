@@ -114,12 +114,6 @@ public class User {
 	
 	 return prenom + " " + nom;
 	}
-	   public void setFullName(String fullName) {
-	        String[] parts = fullName.split(" ");
-	        if (parts.length >= 2) {
-	            this.prenom = parts[0];
-	            this.nom = parts[1];
-	        }
-	   }
+	
 
 }

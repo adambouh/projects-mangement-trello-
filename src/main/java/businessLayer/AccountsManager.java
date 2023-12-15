@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import dataLayer.DataAccountsManager;
-import models.*;
+import models.Methodologie;
+import models.Projet;
+import models.User;
 
 public class AccountsManager implements InterfaceAccountsManager  {
 	public AccountsManager(){}
@@ -71,14 +73,6 @@ public class AccountsManager implements InterfaceAccountsManager  {
 	{
 		return db. getDeveloperMethodology(Id);
 	}
-	@Override 
-	public ArrayList<Technologie> getDeveloperTechnology(int Id)
-	{
-		return db. getDeveloperTechnology(Id);
-	}
-	  public void updateUser(User user) {
-	        db.updateUser(user);
-	    }
 
 		
 
