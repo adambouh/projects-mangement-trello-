@@ -27,7 +27,7 @@ public class Save extends HttpServlet {
         // For simplicity, let's assume it's a plain string in this example
         System.out.println("Received data: " + jsonData);
 
-        // Your logic to process and save the data goes here
+        // Your logic to process and save the data goes herechzgcf mhgc
         // ...
 
         // Send a response back to the client (optional)
