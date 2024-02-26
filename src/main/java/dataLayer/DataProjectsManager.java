@@ -40,9 +40,7 @@ public class DataProjectsManager implements InterfaceDataProjectsManager {
 	    table = DbConnection.getProjects();
 
 	    // Print or display the projects
-	    for (Projet projet : table) {
-	        System.out.println("Project ID: " + projet);
-	    }
+	    
 	    return table;
 	}
 
@@ -53,6 +51,11 @@ public class DataProjectsManager implements InterfaceDataProjectsManager {
 	@Override
 	public void  create(Projet p) {
 		DbConnection.createProject(p);
+	}
+	@Override
+	public Projet getProjectbyId(int id) {
+		
+		return DbConnection.getProjectbyId( id);
 	}
 
 }

@@ -39,16 +39,7 @@ let autoSaveInternalId = setInterval(function (){
     saveData();
 }, 5000);
 
-var appData = {
-    'boards': [],
-    'settings': {
-        'userName': "User",
-        //[not yet] 'defaultTheme': "blue",
-        'dataPersistence': true
-    },
-    'currentBoard': 0,  // The index of the currently open board.
-    'identifier': 0
-};
+ 
 
 function currentCards() {
     return appData.boards[appData.currentBoard].cards;
@@ -155,7 +146,6 @@ function renderAllCards() {
         _card.update();
     }
 }
-
 function renderCard(cardID) {
     let _card = currentCards().find(e => e.id === cardID);
 
@@ -163,19 +153,23 @@ function renderCard(cardID) {
         // If card no longer exists in data. (ie: deleted but still rendered in DOM)
         // Remove it from the DOM
         let _currentCardElement = document.getElementById(cardID);
-        _currentCardElement.parentNode.removeChild(_currentCardElement);
+        if (_currentCardElement) {
+            _currentCardElement.parentNode.removeChild(_currentCardElement);
+        }
         return;
     }
 
     // Get current card element if it exists.
-    let _currentCardElement = document.getElementById(_card.id);
-    if (_currentCardElement != null) {
-        let _generated = _card.generateElement();
+    let _currentCardElement = document.getElementById(cardID);
+    let _generated = _card.generateElement();
+
+    if (_currentCardElement) {
+        // If the current card element exists in the DOM
         // Replace the card from the container.
         _currentCardElement.parentNode.replaceChild(_generated, _currentCardElement);
     } else {
-        let _generated = _card.generateElement();
-        // Put them in the container right before the last child (text box for new card).
+        // If the current card element doesn't exist in the DOM
+        // Put the generated element in the container right before the last child (text box for new card).
         e_cardsContainer.insertBefore(_generated, e_cardsContainer.childNodes[e_cardsContainer.childNodes.length - 2]);
     }
 
@@ -473,7 +467,7 @@ class Board {
         e_addCardText.value = '';
     
         // If the user pressed the button without typing any name, we'll default to "Untitled Card {cards length +1}"
-        if (!_cardTitle) _cardTitle = `Untitled Card ${this.cards.length + 1}`;
+        if (!_cardTitle) _cardTitle = `Service ${this.cards.length + 1}`;
     
         let _card = new Card(_cardTitle, this.uniqueID(), this.id);
         this.cards.push(_card);
@@ -715,59 +709,77 @@ e_cardContextMenuDelete.addEventListener('click', cardContextMenu_deleteCard);
 e_cardContextMenuDuplicate.addEventListener('click', cardContextMenu_duplicateCard);
 
 /* <=================================== Persistent Data Storage ===================================> */
-function saveData() {
-    window.localStorage.setItem('kards-appData', JSON.stringify(appData));
+
+
+
+	function getDataFromLocalStorage() {
+	    return null;
+	}
+	
+	function loadData() {
+	    let _data =null;
+	    if (_data) {
+	        let _appData = JSON.parse(_data);
+	
+	        // Since JSON doesn't store functions and such.
+	        // We'll have to reinitailize the classes with the loaded data.
+	        appData.settings = _appData.settings;
+	        appData.currentBoard = _appData.currentBoard >= 0 ? appData.currentBoard : 0;
+	        appData.identifier = _appData.identifier !== null ? appData.identifier : 0;
+	        
+	        // Fill the data with boards.
+	        for (let _board of _appData.boards) {
+	            let _newBoard = new Board(_board.name, _board.id, _board.settings, _board.identifier);
+	
+	            // Fill the board with cards.
+	            for (let _card of _board.cards) {
+	                let _newCard = new Card(_card.name, _card.id, _board.id);
+	
+	                // Fill the cards with items.
+	                for (let _item of _card.items) {
+	                    let _newItem = new Item(_item.title, _item.description, _item.id, _card.id);
+	                    // Push the item into the card.
+	                    _newCard.items.push(_newItem);
+	                }
+	                // Push the card into the board.
+	                _newBoard.cards.push(_newCard);
+	            }
+	            // Push the board into app data.
+	            appData.boards.push(_newBoard);
+	        }
+	
+	        // Generate the board.
+	        renderBoard(appData.boards[appData.currentBoard]);
+	    } else {
+	        appData.currentBoard = 0;
+	        let _defaultBoard = new Board("Untitled Board", 'b0', {'theme': null});
+	        appData.boards.push(_defaultBoard);
+	    }
+	    listBoards();
+	}
+	function saveData() {
+
+  // Use AJAX to send data to the server
+  fetch('./Save', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(appData)
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Handle the response from the server
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
 }
-
-function getDataFromLocalStorage() {
-    return window.localStorage.getItem('kards-appData');
-}
-
-function loadData() {
-    let _data = window.localStorage.getItem('kards-appData');
-    if (_data) {
-        let _appData = JSON.parse(_data);
-
-        // Since JSON doesn't store functions and such.
-        // We'll have to reinitailize the classes with the loaded data.
-        appData.settings = _appData.settings;
-        appData.currentBoard = _appData.currentBoard >= 0 ? appData.currentBoard : 0;
-        appData.identifier = _appData.identifier !== null ? appData.identifier : 0;
-        
-        // Fill the data with boards.
-        for (let _board of _appData.boards) {
-            let _newBoard = new Board(_board.name, _board.id, _board.settings, _board.identifier);
-
-            // Fill the board with cards.
-            for (let _card of _board.cards) {
-                let _newCard = new Card(_card.name, _card.id, _board.id);
-
-                // Fill the cards with items.
-                for (let _item of _card.items) {
-                    let _newItem = new Item(_item.title, _item.description, _item.id, _card.id);
-                    // Push the item into the card.
-                    _newCard.items.push(_newItem);
-                }
-                // Push the card into the board.
-                _newBoard.cards.push(_newCard);
-            }
-            // Push the board into app data.
-            appData.boards.push(_newBoard);
-        }
-
-        // Generate the board.
-        renderBoard(appData.boards[appData.currentBoard]);
-    } else {
-        appData.currentBoard = 0;
-        let _defaultBoard = new Board("Untitled Board", 'b0', {'theme': null});
-        appData.boards.push(_defaultBoard);
-    }
-    listBoards();
-}
-
-function clearData() {
-    window.localStorage.clear();
-}
+	
+	function clearData() {
+	    window.localStorage.clear();
+	}
 
 loadData();
 
@@ -904,4 +916,5 @@ function createConfirmDialog(text, onConfirm) {
             _modal.style.display = "none";
         }
     }
+   
 }

@@ -1,4 +1,5 @@
-package Vue;
+
+package  presentaion.Vue;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -11,7 +12,7 @@ import models.User;
 
 import java.io.IOException;
 
-import controllers.Authenification;
+import  presentaion.controllers.Authenification;
 import dataLayer.DataAccountsManager;
 
 /**

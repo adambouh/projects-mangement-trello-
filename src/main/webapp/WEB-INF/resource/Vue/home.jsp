@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <%@ include file="homehead.jspf"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="models.*" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="businessLayer.ProjectsManager" %>
+<%@ page import="models.*" %>
 
-<%
+ 
+<% 
     // Assuming you have a method to get projects in your ProjectsManager class
     ProjectsManager projectsManager = new ProjectsManager();
     ArrayList<Projet> projects = projectsManager.GetProjects();
@@ -65,7 +66,14 @@ String darkerColor(String color, int factor) {
     <div class="projects-section">
       <div class="projects-section-header">
         <p>Projects</p>
-        <p class="time"><%=new Date() %></p>
+     <%!    String formatDate(Date date) {
+        if (date == null) {
+            return "N/A";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM d, yyyy");
+        return sdf.format(date);
+    }%>
+        <p class="time"><%=formatDate(new Date()) %></p>
       </div>
       <div class="projects-section-line">
         <div class="projects-status">
@@ -130,7 +138,7 @@ for (Projet project : projects) {
       </div>
           </div>
         </div>
-        <div class="project-box-content-header"><%System.out.println(project.getProjectName()); %>
+        <div class="project-box-content-header">
           <p class="box-content-header"><%=project.getProjectName() %></p>
           <p class="box-content-subheader"><%=project.getDescription()%></p>
         </div>
@@ -144,16 +152,56 @@ for (Projet project : projects) {
         <div class="project-box-footer">
           <div class="participants">
           <% for (User team : project.getEquipe()) { %>
-            <img src="./pics/<%=team.getProfilePic()%>" alt="participant">
+            <img src="<%=team.getProfilePic()%>" alt="participant">
           <%}%>  <button class="add-participant" style="color: <%=darkerColor%>;">
               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
                 <path d="M12 5v14M5 12h14" />
               </svg>
             </button>
           </div>
-          <div class="days-left" style="color: <%=darkerColor%>;">
-            2 Days Left
-          </div>
+          <div class="days-left<%=project.getId()%>" style="color: <%= darkerColor %>;">
+    <script type="text/javascript">
+        // Assuming project.getDateLivraison() returns a formatted date as a string
+        var deliveryDateStr = '<%= project.getDateLivraison() %>';
+
+        var deliveryDate = new Date(deliveryDateStr);
+
+        // Current date
+        var currentDate = new Date();
+
+        // Calculate the difference in milliseconds
+        var timeDifference = deliveryDate-currentDate;
+
+        // Calculate the number of days
+        var daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+
+        // Update the content of the element based on the number of days
+        var daysLeftElement = document.querySelector('.days-left<%=project.getId()%>');
+        if (daysDifference > 0) {
+            daysLeftElement.textContent = daysDifference + " Days Left";
+        } else if (daysDifference === 0) {
+            daysLeftElement.textContent = "Ends today!";
+        } else {
+            daysLeftElement.textContent = "Project ended.";
+        }
+    </script>
+    <style>
+    
+.days-left<%=project.getId()%> {
+  background-color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  border-radius: 20px;
+  flex-shrink: 0;
+  padding: 6px 16px;
+  font-weight: 700;
+}
+  .days-left<%=project.getId()%> {
+    font-size: 8px;
+    padding: 6px 6px;
+    text-align: center;
+  }</style>
+</div>
+
         </div>
       </div>
     </div>    <%}%> 
@@ -230,13 +278,16 @@ for (Projet project : projects) {
 	        }
 	    }
 	}
+ 
   function navigateToProject(projectId) {
 	    // You can use the projectId parameter to construct the URL or perform other actions
-	    var projectUrl = "project/" + projectId;
+	    var projectUrl = "project"
+	    // Add the id parameter to the URL
+	    projectUrl += "?id=" + projectId;
 
 	    // Navigate to the specified URL
 	    window.location.href = projectUrl;
-	  }
+	}
 </script>
 	
 </body>

@@ -1,5 +1,4 @@
-
-<%@ page import="models.*" %>
+<%@ page import="models.*"%>
 <%@ page import="businessLayer.*" %>
   <div class="app-header">
     <div class="app-header-left">
@@ -30,12 +29,30 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
           <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
           <path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg>
+           <span class="notification-count" style="background-color: red;">3</span>
+          <style>.notification-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.notification-count {
+    position: absolute;
+    top: 14px;
+    right: -7px;
+    background-color: red;
+    color: white;
+    font-size: 8px;
+    padding: 3px 6px;
+    border-radius: 50%;
+}
+          </style>
       </button>
       <button class="profile-btn" id="profile-btn">
      <%   AccountsManager account = new AccountsManager();%>
      <% String username=(String) session.getAttribute("username");
-   		  User user = account.getUserByUsername(username);%>
-        <img src="./pics/<%= user != null ? user.getProfilePic() : "default-profile.png" %>"/>
+   		  User homeuser = account.getUserByUsername(username);%>
+        <img src="<%= homeuser != null ? homeuser.getProfilePic() : "default-profile.png" %>"/>
         <span><%=username %></span>
       </button>
     </div>
@@ -118,7 +135,7 @@
         <label for="teamLeader" class="formbold-form-label"> Team Leader </label>
       <select class="formbold-form-input" name="teamLeader" id="teamLeader">
     <!-- Iterate through the list of users and generate options dynamically -->
-    	<% for (User devs:account.getDevs()) {%>
+    	<% for (User devs:account.getDevs()) {System.out.println(devs.getUsername());%>
         <option value="<%=devs.getUsername() %>"><%=devs.getUsername() %></option>
         <%} %>
 </select>

@@ -18,13 +18,17 @@
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>default</servlet-name>
+    <url-pattern>/css/js/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
     <url-pattern>/pics/*</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>Authenification</display-name>
     <servlet-name>Authenification</servlet-name>
-    <servlet-class>controllers.Authenification</servlet-class>
+    <servlet-class> presentaion.controllers.Authenification</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Authenification</servlet-name>
@@ -34,7 +38,7 @@
     <description></description>
     <display-name>Login</display-name>
     <servlet-name>Login</servlet-name>
-    <servlet-class>Vue.Login</servlet-class>
+    <servlet-class>presentaion.Vue.Login</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
@@ -44,7 +48,7 @@
     <description></description>
     <display-name>Logout</display-name>
     <servlet-name>Logout</servlet-name>
-    <servlet-class>controllers.Logout</servlet-class>
+    <servlet-class>presentaion.controllers.Logout</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Logout</servlet-name>
@@ -54,7 +58,7 @@
     <description></description>
     <display-name>Home</display-name>
     <servlet-name>Home</servlet-name>
-    <servlet-class>Vue.Home</servlet-class>
+    <servlet-class>presentaion.Vue.Home</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Home</servlet-name>
@@ -64,7 +68,7 @@
     <description></description>
     <display-name>Forget_pwd</display-name>
     <servlet-name>Forget_pwd</servlet-name>
-    <servlet-class>Vue.Forget_pwd</servlet-class>
+    <servlet-class>presentaion.Vue.Forget_pwd</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Forget_pwd</servlet-name>
@@ -74,7 +78,7 @@
     <description></description>
     <display-name>Register</display-name>
     <servlet-name>Register</servlet-name>
-    <servlet-class>Vue.Register</servlet-class>
+    <servlet-class>presentaion.Vue.Register</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Register</servlet-name>
@@ -88,7 +92,7 @@
     <description></description>
     <display-name>profile</display-name>
     <servlet-name>profile</servlet-name>
-    <servlet-class>Vue.profile</servlet-class>
+    <servlet-class>presentaion.Vue.profile</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>profile</servlet-name>
@@ -98,7 +102,7 @@
     <description></description>
     <display-name>newproject</display-name>
     <servlet-name>newproject</servlet-name>
-    <servlet-class>controllers.newproject</servlet-class>
+    <servlet-class>presentaion.controllers.newproject</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>newproject</servlet-name>
@@ -108,7 +112,7 @@
     <description></description>
     <display-name>New</display-name>
     <servlet-name>New</servlet-name>
-    <servlet-class>controllers.New</servlet-class>
+    <servlet-class>presentaion.controllers.New</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>New</servlet-name>
@@ -118,17 +122,17 @@
     <description></description>
     <display-name>project</display-name>
     <servlet-name>project</servlet-name>
-    <servlet-class>Vue.project</servlet-class>
+    <servlet-class>presentaion.Vue.project</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>project</servlet-name>
-    <url-pattern>/project/*</url-pattern>
+    <url-pattern>/project</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>EditProfileServlet</display-name>
     <servlet-name>EditProfileServlet</servlet-name>
-    <servlet-class>controllers.EditProfileServlet</servlet-class>
+    <servlet-class>presentaion.controllers.EditProfileServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>EditProfileServlet</servlet-name>
@@ -138,10 +142,20 @@
     <description></description>
     <display-name>EditSkillsServlet</display-name>
     <servlet-name>EditSkillsServlet</servlet-name>
-    <servlet-class>controllers.EditSkills</servlet-class>
+    <servlet-class>presentaion.controllers.EditSkills</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>EditSkillsServlet</servlet-name>
     <url-pattern>/EditSkillsServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Save</display-name>
+    <servlet-name>Save</servlet-name>
+    <servlet-class>presentaion.controllers.Save</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Save</servlet-name>
+    <url-pattern>/Save</url-pattern>
   </servlet-mapping>
 </web-app>

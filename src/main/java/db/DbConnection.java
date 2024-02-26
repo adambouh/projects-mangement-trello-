@@ -44,7 +44,6 @@ public class DbConnection {
     }
 
     public static User getUserById(String id) {
-    	System.out.println(id);
         User user = null;
         try {
             Connection conn = getConnection();
@@ -286,11 +285,9 @@ public class DbConnection {
         ArrayList<User> team = new ArrayList<>();
 
         try {
-        	System.out.println(projectID);
             Connection conn = getConnection();
             String teamQuery = "SELECT DeveloperID FROM ProjectDevelopers WHERE ProjectID = ?";
             PreparedStatement teamStatement = conn.prepareStatement(teamQuery);
-            System.out.println(teamStatement);
             teamStatement.setString(1, projectID);
            
             ResultSet teamResultSet = teamStatement.executeQuery();
@@ -561,8 +558,53 @@ public class DbConnection {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); 
             // Handle exception appropriately
+        }}
+
+	public static Projet getProjectbyId(int id) {
+		 try {
+		Connection conn = getConnection();
+        String query = "SELECT * FROM projects where projectId ="+id+";";
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        while (resultSet.next()) {
+            String projectID = resultSet.getString("ProjectID");
+            String projectName = resultSet.getString("ProjectName");
+            String description = resultSet.getString("Description");
+            String client = resultSet.getString("Client");
+            String projectManagerID = resultSet.getString("ProjectManagerID");
+            int duration = resultSet.getInt("DevelopmentDays");
+
+            // Parse dates
+            Date startDate = resultSet.getString("StartDate") != null ?
+                    dateFormat.parse(resultSet.getString("StartDate")) : null;
+            Date deliveryDate = resultSet.getString("DeliveryDate") != null ?
+                    dateFormat.parse(resultSet.getString("DeliveryDate")) : null;
+
+
+            // Get the project manager
+            User manager = getUserById(projectManagerID);
+
+            // Get team members, methodologies, technologies, and services
+            ArrayList<User> team = getTeamMembers(projectID);
+            ArrayList<Methodologie> methodologies = getProjectMethodologies(projectID);
+            ArrayList<Technologie> technologies = getProjectTechnologies(projectID);
+            ArrayList<Services> services = getProjectServices(projectID);
+
+            // Create a Project object with parsed dates and duration
+            return new Projet(projectID,projectName, startDate, deliveryDate, duration, description, client,manager ,team, methodologies, technologies, services);
+           
         }
+
+	
+    }
+    catch (SQLException | ParseException e) {
+        e.printStackTrace();
+        throw new RuntimeException("Error fetching projects");
+    }
+		return null;
     }
 }

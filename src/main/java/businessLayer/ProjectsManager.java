@@ -29,6 +29,9 @@ public class ProjectsManager implements InterfaceProjectsManager  {
 	public  void  create(Projet p){
 		 db.create(p);
 	}
+	@Override
+	public  Projet  getProjectById(int id ){
+		return db.getProjectbyId(id);}
 	
 
 	

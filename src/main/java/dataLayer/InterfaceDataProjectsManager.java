@@ -12,4 +12,5 @@ public interface InterfaceDataProjectsManager {
     public ArrayList<Projet> GetProjectsDev();
     public void AddProject(Projet p) ;
 	void create(Projet p);
+	Projet getProjectbyId(int id);;
 }

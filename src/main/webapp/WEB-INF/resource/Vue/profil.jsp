@@ -4,12 +4,13 @@
 <%@ page import="businessLayer.*" %>
 <%@ page import="models.*" %>
 <%@ page import="java.util.ArrayList" %>
+
  <%  
     AccountsManager accountmanager = new AccountsManager();
     User user = accountmanager.getUserByUsername((String)session.getAttribute("username"));
     ArrayList<Methodologie> methodologies = accountmanager.getDeveloperMethodology(user.getId());
     ArrayList<Technologie> technologies = accountmanager.getDeveloperTechnology(user.getId());
-
+ 
 %>
 <html lang="en" >
 <head>
@@ -27,12 +28,13 @@
 <!-- partial:index.partial.html -->
 <div class="app-container">
 <!--  top barr at homeee -->
+<%@ include file="tophome.jspf"%>
 
   <div class="app-content">
-
-
-
- <div class="projects-section">
+     <%@ include file="side.jspf"%>
+ 
+    <div class="projects-section">
+      <div class="projects-section-header">
 
 <div class="container">
 <div class="row gutters">
@@ -200,5 +202,7 @@
         toggleFormFields(false);
     });
 </script>
+  <script  src="./css/script.js"></script>
+
 </body>
 </html>

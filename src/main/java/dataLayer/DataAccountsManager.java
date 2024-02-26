@@ -15,18 +15,18 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 	static ArrayList<User> users=new ArrayList<>();
 	@Override
 	public void AddAccount(User p) {
-	    System.out.println("Adding account: " + p.getUsername() + ", " + p.getPassword());
+	    //System.out.println"Adding account: " + p.getUsername() + ", " + p.getPassword());
 	    if (p.getUsername() != null && p.getPassword() != null) {
 	        table.put(p.getUsername(), p.getPassword());
 	    } else {
 	        // Handle the case where username or password is null
-	        System.out.println("Username or password is null");
+	        //System.out.println"Username or password is null");
 	    }
 	}
 	@Override
 	public boolean ValidateAccount(User p) {
 	    GetAccounts();
-	  //  System.out.println(table);
+	  //  //System.out.printlntable);
 	    if (p.getUsername() != null && table.containsKey(p.getUsername())) {
 	        String pwd = table.get(p.getUsername());
 	        if (pwd.equals(p.getPassword())) {
@@ -41,7 +41,7 @@ public class DataAccountsManager implements InterfaceDataAccountsManager {
 	 @Override
 	public boolean IsUser(String username) {
 	    GetAccounts();
-	  //  System.out.println(table);
+	  //  //System.out.printlntable);
 	    if (username != null && table.containsKey(username)) {
 	       return true;
 	    } else {

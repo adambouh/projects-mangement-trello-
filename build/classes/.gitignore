@@ -1,6 +1,5 @@
+/businessLayer/
 /dataLayer/
 /db/
 /models/
-/businessLayer/
-/Vue/
-/controllers/
+/presentaion/

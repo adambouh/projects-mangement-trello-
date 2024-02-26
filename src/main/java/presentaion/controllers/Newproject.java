@@ -1,4 +1,4 @@
-package controllers;
+package presentaion.controllers;
 import businessLayer.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -31,7 +31,7 @@ public class Newproject extends HttpServlet {
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("posttttt");
+		//System.out.println"posttttt");
 		  // Extract parameters from the request
         String projectName = request.getParameter("projectName");
         String dateBeginStr = request.getParameter("start");

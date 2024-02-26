@@ -15,4 +15,5 @@ public interface InterfaceProjectsManager {
 
 	void create(Projet p);
 
+	Projet getProjectById(int id);
 }

@@ -122,6 +122,13 @@ public class Projet {
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM d, yyyy");
         return sdf.format(date);
     }
+	private String formatDateweb(Date date) {
+        if (date == null) {
+            return "N/A";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(date);
+    }
 
 	public String getProjectName() {
 		return projectName;
@@ -133,6 +140,14 @@ public class Projet {
 
 	public String getDateLivraison() {
 		return formatDate(dateLivraison);
+	}public String getDateBeginweb() {
+		return formatDateweb(dateBegin);
+	}
+
+	public String getDateLivraisonweb() {
+		System.out.println(formatDateweb(dateLivraison));
+
+		return formatDateweb(dateLivraison);
 	}
 
 	public int getDuration() {

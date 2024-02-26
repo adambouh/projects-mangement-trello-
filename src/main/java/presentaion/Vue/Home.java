@@ -1,5 +1,4 @@
-package Vue;
-import controllers.Authenification;
+package presentaion.Vue;
 import java.io.IOException;
 
 import businessLayer.ProjectsManager;
@@ -11,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import models.User;
-import controllers.Authenification;
+import  presentaion.controllers.*;
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
