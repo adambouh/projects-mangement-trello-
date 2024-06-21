@@ -1,5 +1,5 @@
 # Project Management Application
-# #Overview
+## Overview
 This application is a project management tool similar to Trello. It helps manage projects, assign tasks to developers, and track progress. The application is built using Java servlets for the back end and JSP for the front end, and runs on an Apache Tomcat server.
 
 ## Features
