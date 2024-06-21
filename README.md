@@ -40,7 +40,7 @@ Start the Tomcat server.
 Access the Application
 
 Open your web browser and navigate to http://localhost:8080/project-management-app.
-#Usage
+## Usage
 Sign Up
 
 Create a new account by signing up.
